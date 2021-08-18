@@ -9,7 +9,6 @@ db.connect()
 const app = express()
 app.use(methodOverride('_method'))
 // demo test
-
 app.engine('.hbs', exphbs({ extname: '.hbs' }))
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'resources/views'))
