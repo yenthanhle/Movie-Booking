@@ -20,7 +20,7 @@ app.use(
         extended: true,
     }),
 );
-// for post py fetch, httpRequest,...
+// For post py fetch, httpRequest,...
 app.use(express.json());
 
 routes(app)
