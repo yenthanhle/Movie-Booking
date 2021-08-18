@@ -1,0 +1,119 @@
+<div class="container">
+
+    <a href="/stored/movies/timeline/editTimeline" class="btn btn-outline-primary ml-4 mr-4 mt-4">Sửa lịch chiếu</a>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="col-1">#</th>
+                <th scope="col" class="col-5">Tên phim</th>
+                <th scope="col" class="col-3">Tên rạp</th>
+                <th scope="col" class="col-2">Ngày</th>
+                <th scope="col" class="col-1">Giờ</th>
+                <th scope="col" class="col-1" span="2">Phòng</th>
+                <th scope="col" class="col-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each timelines}}
+            <tr>
+                <form method="POST" action="/stored/timelines/{{this._id}}?_method=PUT">
+                    <th scope=" row">{{@index}}</th>
+                    <td>{{this.movie}}</td>
+                    <td id="theater-{{@index}}">{{this.theater}}</td>
+                    <td>
+                        <input class="td-date" type="date" name="date" readonly value={{this.date}}>
+                    </td>
+                    <td>
+                        <input class="td-time" type="time" name="time" readonly value={{this.time}}>
+                    </td>
+                    <td>
+                        <input class="td-room" type="number" name="room" readonly value={{this.room}}>
+                    </td>
+                    <td>
+                        {{!-- <a href="/stored/timelines/{{this._id}}/edit"
+                            class="btn-outline-primary ml-4 mr-4">Sửa</a>
+                        --}}
+                        <div class="flex">
+                            <button type="button" class="btn-edit button btn-outline-primary mr-3"
+                                onclick="clickFunc(this)">Sửa</button>
+                            <button type="submit" id="btn-update" class="btn-secondary mr-3 hidden">Cập
+                                nhật</button>
+                            <button href="" class="btn-outline-primary " data-id={{this._id}} data-toggle="modal"
+                                data-target="#deleteModal">Xoá</button>
+
+                        </div>
+                    </td>
+                </form>
+
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+
+</div>
+<form method="POST" name="deleteForm"></form>
+
+<!-- Delete confirm -->
+<div id="deleteModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Course</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete this timeline?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelete" type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function clickFunc(e) {
+        const tdDate = e.closest('tr').querySelector('.td-date')
+        const tdTime = e.closest('tr').querySelector('.td-time')
+        const tdRoom = e.closest('tr').querySelector('.td-room')
+        const btnUpdate = e.closest('td').querySelector('#btn-update')
+        btnUpdate.classList.toggle('hidden')
+        e.classList.toggle('hidden')
+        tdDate.readOnly = false
+        tdTime.readOnly = false
+        tdRoom.readOnly = false
+        e.preventDefault()
+    }
+
+
+</script>
+
+<script>
+    // wait for load all content (css, jquery,...)
+    document.addEventListener("DOMContentLoaded", function () {
+        var deleteId
+        const btnDelete = document.getElementById('btnDelete')
+        var deleteForm = document.forms['deleteForm']
+
+        // while show dialod
+        document.querySelector('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            deleteId = button.data('id')
+        })
+
+        // click btn delete
+        btnDelete.onclick = function (event) {
+            deleteForm.action = `stored/timelines/${deleteId}?_method=DELETE`
+            deleteForm.submit()
+        }
+    })
+
+</script>

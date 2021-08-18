@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    {{#if respond.error}}
+    <div class="alert alert-danger" role="alert">
+        {{respond.error}}
+    </div>
+    {{/if}}
+    <form method="POST" action="/customers/login" id="form-login" class="form-inline">
+        <div class="form-group col-md-10 mt-4 form-row">
+            <label for="user_name" class="col-sm-2 col-form-label">User name</label>
+            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="User name" required>
+            <div class="invalid-feedback form-message"></div>
+        </div>
+
+        <div class="col-md-10 mt-4 form-row">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <div class="invalid-feedback  ml-4 form-message"> </div>
+        </div>
+        <div class="form-group col-md-10 mt-4 form-row">
+            <a href="/customers/register">Create account</a>
+
+        </div>
+        <div class="form-group col-md-10 mt-4 form-row">
+            <button type="submit" class="btn btn-primary">Log in</button>
+
+        </div>
+
+    </form>
+</div>
+
+
+<script src="/validators/loginValidator.js"></script>
+<script>
+    Validator({
+        form: '#form-login',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#user_name', 'Nhập tên đầy đủ'),
+            Validator.isRequired('#password', 'Nhập mật khẩu')
+        ]
+    })
+
+</script>

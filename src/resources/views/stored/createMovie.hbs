@@ -1,0 +1,71 @@
+<div class="container">
+    <form class="film-input" method="POST" action="/stored/movies/createMovie">
+        <div class="row mt-4">
+            <div class="form-field form-group col-5">
+                <label class="label">Tên phim</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="form-field form-group col-5">
+                <label class="label">Thể loại</label>
+                <input type="text" class="form-control" name="genre">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-field form-group col-5">
+                <label class="label">Thời lượng</label>
+                <input type="text" class="form-control" name="duration">
+            </div>
+            <div class="form-field col-5">
+                <label class="label">Ngày khởi chiếu</label>
+                <input type="date" class="form-control" name="release_date">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-field col-5">
+                <label class="label">Đạo diễn</label>
+                <input type="text" class="form-control" name="director">
+            </div>
+            <div class="form-field col-5">
+                <label class="label">Diễn viên</label>
+                <input type="text" class="form-control" name="actor">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-field col-5">
+                <label class="label">Mô tả</label>
+                <textarea type="text" class="form-control" name="description"></textarea>
+            </div>
+            <div class="form-field col-5">
+                <label class="label">Quốc gia</label>
+                <input type="text" class="form-control" name="country">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-field col-5">
+                <label class="label">Đánh giá</label>
+                <input type="text" class="form-control" name="rating">
+            </div>
+            <div class="form-field col-5">
+                <label class="label">Số lượt bán</label>
+                <input type="text" class="form-control" name="sold_ticket">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-field col-5">
+                <label class="label">Poster</label>
+                <textarea type="text" class="form-control" name="poster"></textarea>
+            </div>
+            <div class="form-field col-5">
+                <label class="label">Link trailer</label>
+                <input type="text" class="form-control" name="trailer">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Tạo phim</button>
+    </form>
+</div>

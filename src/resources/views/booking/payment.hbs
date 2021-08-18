@@ -1,0 +1,29 @@
+<div class="container">
+    <form class="film-input" method="POST" action="/booking/payment/confirm">
+        <div class="form-field">
+            <label class="label">Mã user</label>
+            <input type="text" class="form-control" name="user_id" value={{infor.user_id}} readonly>
+        </div>
+        <div class="form-field">
+            <label class="label">Mã lịch chiếu</label>
+            <input type="text" class="form-control" name="timeline_id" value={{infor.timeline_id}} readonly>
+        </div>
+        <div class="form-field">
+            <label class="label">Ngày thanh toán</label>
+            <input type="text" class="form-control" value={{infor.time_created}} readonly>
+        </div>
+        <div class="form-field">
+            <label class="label">Số vé</label>
+            <input type="text" class="form-control" name="seat_count" value={{infor.seat_count}} readonly>
+        </div>
+        <div class="form-field col-5">
+            <label class="label">Ghế</label>
+            <input type="text" class="form-control" name="seat_name" value="{{infor.seat_name}}" readonly>
+        </div>
+        <div class="form-field col-5">
+            <label class="label">Tổng tiền</label>
+            <input type="text" class="form-control" name="payment" value={{infor.payment}} readonly>
+        </div>
+        <button type="submit">Thanh toán</button>
+    </form>
+</div>

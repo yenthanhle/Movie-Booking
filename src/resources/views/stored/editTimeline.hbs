@@ -1,0 +1,36 @@
+<div class="container">
+    <form class="film-input" method="POST" action="/stored/timelines/{{timeline._id}}?_method=PUT">
+        <div class="row mt-4">
+            <div class="select-panel">
+                <div class="label">Rạp</div>
+                <input type="text" class="form-control" value={{timeline.theater}}>
+
+            </div>
+            <div class="select-panel">
+                <div class="label">Phim</div>
+                <input type="text" class="form-control" value={{timeline.movie}}>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-field form-group col-5">
+                <label class="label">Ngày chiếu</label>
+                <input type="date" class="form-control" name="date" value={{timeline.date}}>
+            </div>
+            <div class="form-field col-5">
+                <label class="label">Giờ chiếu</label>
+                <input type="time" class="form-control" name="time" value={{timeline.time}}>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-field col-5">
+                <label class="label">Phòng</label>
+                <input type="text" class="form-control" name="room" value={{timeline.room}}>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Cập nhật</button>
+    </form>
+</div>

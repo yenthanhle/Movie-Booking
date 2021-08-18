@@ -1,0 +1,136 @@
+<div class="container selection-panel mt-4">
+    <div class="select-date-panel">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" index-value='0' onclick="clickFunc(this)">Hôm nay</button>
+            <button type="button" class="btn btn-secondary" index-value='1' onclick="clickFunc(this)">Thứ 3</button>
+            <button type="button" class="btn btn-secondary" index-value='2' onclick="clickFunc(this)">Thứ 4</button>
+            <button type="button" class="btn btn-secondary" index-value='3' onclick="clickFunc(this)">Thứ 5</button>
+            <button type="button" class="btn btn-secondary" index-value='4' onclick="clickFunc(this)">Thứ 6</button>
+            <button type="button" class="btn btn-secondary" index-value='5' onclick="clickFunc(this)">Thứ 7</button>
+            <button type="button" class="btn btn-secondary" index-value='6' onclick="clickFunc(this)">Thứ cn</button>
+
+        </div>
+        <div class="timeline-infor timeline-infor-0 active">
+            {{#each timelines.[0]}}
+
+            <p>{{this.theater_name}}</p>
+            <form method="post" action="">
+                <div class="theater-timeline">
+                    {{#with this.listTimeline as | timeline |}}
+                    {{#each timeline}}
+                    <a href="/booking/{{this._id}}/detail" type="button" class="btn btn-secondary">{{this.time}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </form>
+            {{/each}}
+
+        </div>
+        <div class="timeline-infor timeline-infor-1">
+            {{#each timelines.[1]}}
+            <p>{{this.theater_name}}</p>
+            <form method="post" action="">
+                <div class="theater-timeline">
+                    {{#with this.listTimeline as | timeline |}}
+                    {{#each timeline}}
+                    <a href="/booking/{{this._id}}/detail" type="button" class="btn btn-secondary">{{this.time}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </form>
+            {{/each}}
+
+        </div>
+        <div class="timeline-infor timeline-infor-2">
+            {{#each timelines.[2]}}
+            <p>{{this.theater_name}}</p>
+            <form method="post" action="">
+                <div class="theater-timeline">
+                    {{#with this.listTimeline as | timeline |}}
+                    {{#each timeline}}
+                    <a href="/booking/{{this._id}}/detail" type="button" class="btn btn-secondary">{{this.time}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </form>
+            {{/each}}
+
+        </div>
+
+        <div class="timeline-infor timeline-infor-3">
+            {{#each timelines.[3]}}
+            <p>{{this.theater_name}}</p>
+            <form method="post" action="">
+                <div class="theater-timeline">
+                    {{#with this.listTimeline as | timeline |}}
+                    {{#each timeline}}
+                    <a href="/booking/{{this._id}}/detail" type="button" class="btn btn-secondary">{{this.time}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </form>
+            {{/each}}
+
+        </div>
+        <div class="timeline-infor timeline-infor-4">
+            {{#each timelines.[4]}}
+            <p>{{this.theater_name}}</p>
+            <form method="post" action="">
+                <div class="theater-timeline">
+                    {{#with this.listTimeline as | timeline |}}
+                    {{#each timeline}}
+                    <a href="/booking/{{this._id}}/detail" type="button" class="btn btn-secondary">{{this.time}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </form>
+            {{/each}}
+
+        </div>
+        <div class="timeline-infor timeline-infor-5">
+            {{#each timelines.[5]}}
+            <p>{{this.theater_name}}</p>
+            <form method="post" action="">
+                <div class="theater-timeline">
+                    {{#with this.listTimeline as | timeline |}}
+                    {{#each timeline}}
+                    <a href="/booking/{{this._id}}/detail" type="button" class="btn btn-secondary">{{this.time}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </form>
+            {{/each}}
+
+        </div>
+        <div class="timeline-infor timeline-infor-6">
+            {{#each timelines.[6]}}
+            <p>{{this.theater_name}}</p>
+            <form method="post" action="">
+                <div class="theater-timeline">
+                    {{#with this.listTimeline as | timeline |}}
+                    {{#each timeline}}
+                    <a href="/booking/{{this._id}}/detail" type="button" class="btn btn-secondary">{{this.time}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </form>
+            {{/each}}
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<script>
+
+    function clickFunc(e) {
+        const index = e.getAttribute('index-value')
+        document.querySelector('.timeline-infor.active').classList.remove('active')
+        const timelineInforPanel = document.querySelector(`.timeline-infor-${index}`)
+        timelineInforPanel.classList.add('active')
+    }
+
+
+</script>

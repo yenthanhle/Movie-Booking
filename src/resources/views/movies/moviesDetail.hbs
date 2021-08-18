@@ -1,0 +1,33 @@
+<div class="movie-trailer">
+
+    <iframe width="700" height="450" src="https://www.youtube.com/embed/{{movie.trailer}}" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+</div>
+
+<div class="container mt-4">
+
+    <div class="film-infor-top">
+        <div class="thumb">
+            <img id="poster-small" src="{{movie.poster}}">
+        </div>
+
+        <div class="film-common-infor">
+            <h4>{{movie.name}}</h4>
+            <p>Xếp hạng: {{movie.rating}}</p>
+            <p>Ngày khởi chiếu: {{movie.release_date}}</p>
+            <p>Thể loại: {{movie.genre}}</p>
+            <p>Đạo diễn: {{movie.director}}</p>
+            <p>Diễn viên: {{movie.actor}}, ...</p>
+            <br>
+            <a href="/booking/{{movie._id}}" type="button" class="btn btn-success">Đặt vé</a>
+        </div>
+    </div>
+
+    <div class="film-description mt-4">
+        <h4>Tóm tắt</h4>
+        <p>{{movie.description}}</p>
+    </div>
+
+    .
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+    <a href="/stored/movies/createMovie" class="btn btn-outline-primary ml-4 mr-4 mt-4">Thêm phim</a>
+    <a href="/stored/timelines" class="btn btn-outline-primary ml-4 mr-4 mt-4">Lịch chiếu</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên phim</th>
+                <th scope="col">Thể loại</th>
+                <th scope="col">Thời lượng</th>
+                <th scope="col">Ngày khỏi chiếu</th>
+                <th scope="col">Đạo diễn</th>
+                <th scope="col">Diễn viên</th>
+                <th scope="col" class="description-column">Mô tả</th>
+                <th scope="col">Quốc gia</th>
+                <th scope="col">Đánh giá</th>
+                <th scope="col">Số vé bán</th>
+                <th scope="col">Poster</th>
+                <th scope="col">Trailer</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each movies}}
+            <tr>
+                <th scope="row">{{@index}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.genre}}</td>
+                <td>{{this.duration}}</td>
+                <td>{{this.release_date}}</td>
+                <td>{{this.director}}</td>
+                <td>{{this.actor}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.country}}</td>
+                <td>{{this.rating}}</td>
+                <td>{{this.sold_ticket}}</td>
+                <td>{{this.poster}}</td>
+                <td>{{this.trailer}}</td>
+                <td>
+                    <a href="/stored/movies/{{this._id}}/edit" class="btn-outline-primary ml-4 mr-4">Sửa</a>
+                    <a href="" class="btn-outline-primary mr-2" data-id="" data-toggle="modal"
+                        data-target="#deleteModal">Xoá</a>
+                </td>
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <a href="" class="btn btn-success btn-lg active" role="button" type="button">Cập nhật</a>
+    <a href="" class="btn btn-danger btn-lg active" role="button" type="button">Huỷ</a>
+
+</div>

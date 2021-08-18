@@ -1,0 +1,260 @@
+.test {
+  border-style: solid;
+  border-color: green;
+}
+
+h2 {
+  // align-items: center;
+  // justify-content: center;
+  text-align: center;
+}
+
+.card-movie-item {
+  margin-bottom: 10px;
+}
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.customer-infor {
+  display: flex;
+  height: 100%;
+}
+.left {
+  width: 20%;
+  height: 100%;
+}
+
+.right {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  // justify-content: center;
+}
+
+.customer-infor {
+  display: flex;
+  margin-right: auto;
+}
+.form-field {
+  display: flex;
+  width: 100%;
+  margin: auto;
+}
+.label {
+  width: 35%;
+  height: 30px;
+  line-height: 30px;
+  // display: block;
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Raleway', sans-serif;
+  color: black;
+}
+.film-input.label {
+  width: auto;
+}
+
+.input {
+  width: 60%;
+  height: 30px;
+  border-radius: 15px;
+  padding: 12px 0px;
+  margin: 8px 0;
+  // display: block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 15px;
+  text-align: center;
+}
+
+.btn-dropdown {
+  width: 1px;
+  height: 65%;
+  border-radius: 25%;
+}
+//   .slide-movies {
+//     width: 70%;
+//     margin: 0 auto;
+//   }
+.movies-list-container {
+  width: 70%;
+  margin: 0 auto;
+}
+.movies-poster-slide {
+  width: 100%;
+  height: 70%;
+}
+.selection-panel {
+  display: flex;
+}
+.btn-panel {
+  margin-left: 35%;
+  width: auto;
+  padding: 4px;
+  // left: 25%;
+}
+.movie-trailer {
+  width: 100%;
+  height: 70%;
+  padding: 5px;
+  text-align: center;
+  background-color: rgb(39, 36, 36);
+}
+.film-infor-top {
+  width: 100%;
+  display: flex;
+  height: 270px;
+}
+
+.thumb {
+  width: 25%;
+  height: 100%;
+}
+#poster-small {
+  width: 90%;
+  height: 100%;
+}
+.film-common-infor {
+  width: 75%;
+  height: 100%;
+  text-align: left;
+}
+
+.board {
+  margin-top: 30px;
+  margin-left: 70px;
+  float: left;
+  justify-content: center;
+  flex: 1 1 0%;
+  display: grid;
+  grid-template-columns: repeat(16, auto);
+}
+
+.cell {
+  position: relative;
+  border: 1px solid rgb(77, 76, 76);
+  padding-top: 100%;
+  width: 30px;
+  cursor: pointer;
+  position: relative;
+}
+.cell span {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  text-align: center;
+}
+.cell-top {
+  background-color: rgb(180, 175, 175);
+}
+.cell-bottom {
+  background-color: rgb(212, 140, 152);
+}
+.cell-couple {
+  background-color: rgb(248, 69, 173);
+}
+
+.theater-select {
+  position: relative;
+  display: flex;
+  width: auto;
+  width: 30%;
+}
+
+.theater-select select {
+  display: none;
+
+  /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: white;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: '';
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: black transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent black transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+  color: black;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: white;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.unselectable {
+  cursor: not-allowed;
+}
+.seat-position {
+  width: 65%;
+}
+.booking-detail {
+  width: 35%;
+}
+.booking {
+  display: flex;
+}
+.cell.active {
+  background-color: yellow;
+}
+.timeline-infor {
+  display: none;
+}
+
+.timeline-infor.active {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+.flex {
+  display: flex;
+}
+.table {
+  text-align: center;
+}
+.description-column {
+  width: 1000px;
+}
