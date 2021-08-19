@@ -99,7 +99,7 @@ class BookingController {
     console.log('Body: ', req.body)
 
     const formData = req.body
-    formData.user_id = 'user001'
+    formData.user_id = req.cookies.user_id
     formData.seat_name = formData.seat_name.trim()
     formData.time_created = new Date().toLocaleDateString()
     // console.log(formData.time_created)
@@ -115,7 +115,7 @@ class BookingController {
     // const timeline = new Bill(formData)
     bill.save()
     // console.log(bill)
-    res.redirect('/movies')
+    res.redirect('/movie')
   }
 }
 

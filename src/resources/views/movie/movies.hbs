@@ -25,20 +25,20 @@
     </div>
     <div class="list-movies">
         <div class="btn-panel btn-group" role="group">
-            <a href="/movies/showing-now" type="button" class="btn btn-success">Phim đang chiếu</a>
-            
+            <a href="/movie/showing-now" type="button" class="btn btn-success">Phim đang chiếu</a>
+
             <p></p>
-            <a href="/movies/comming-soon" type="button" class="btn btn-success">Phim sắp chiếu</a>
+            <a href="/movie/comming-soon" type="button" class="btn btn-success">Phim sắp chiếu</a>
         </div>
         <div class="row">
             {{#each movies}}
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-movie-item">
-                    <a href='/movies/{{this.slug}}'>
+                    <a href='/movie/{{this.slug}}'>
                         <img class="card-img-top" src={{this.poster}} alt="Card image cap">
                     </a>
                     <div class="card-body">
-                        <a href='/movies'>
+                        <a href='/movie'>
                             <h5 class="card-title"></h5>
                         </a>
                         <p class="card-text">{{this.name}}</p>

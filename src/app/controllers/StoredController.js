@@ -13,7 +13,7 @@ const {
 class StoredController {
   index(req, res) {
     Movies.find({}, function (err, movies) {
-      res.render('stored/listMovies', {
+      res.render('stored/listMovie', {
         movies: multiMongooseToMoviesObject(movies),
       })
     })
@@ -75,7 +75,7 @@ class StoredController {
           result.push({ ...params })
         }),
       )
-      res.render('stored/listTimelines', { timelines: result })
+      res.render('stored/listTimeline', { timelines: result })
     })
   }
   createTimeline(req, res) {

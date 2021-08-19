@@ -1,15 +1,15 @@
 const homeRouter = require('./home')
 const storedRouter = require('./stored')
-const customerRouter = require('./customers')
-const movieRouter = require('./movies')
+const customerRouter = require('./customer')
+const movieRouter = require('./movie')
 const bookingRouter = require('./booking')
-const loginController = require('./login')
+const accountController = require('./account')
 function route(app) {
   app.use('/stored', storedRouter)
-  app.use('/customers', customerRouter)
-  app.use('/movies', movieRouter)
+  app.use('/customer', customerRouter)
+  app.use('/movie', movieRouter)
   app.use('/booking', bookingRouter)
-  // app.use('/login', loginController)
+  app.use('/account', accountController)
   app.use('/', homeRouter)
 }
 

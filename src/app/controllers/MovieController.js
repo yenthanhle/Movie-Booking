@@ -6,19 +6,19 @@ const {
 } = require('../util/mongoose')
 class MoviesController {
   index(req, res) {
-    res.render('movies/movies')
+    res.render('movie/movies')
   }
   detail(req, res) {
     Movie.findOne({ slug: req.params.slug }, function (err, movie) {
       // docs.forEach
-      res.render('movies/moviesDetail', { movie: mongooseToMovieObject(movie) })
+      res.render('movie/moviesDetail', { movie: mongooseToMovieObject(movie) })
     })
   }
 
   getCommingMovies(req, res) {
     const today = new Date()
     Movie.find({ release_date: { $gte: today } }, function (err, movies) {
-      res.render('movies/movies', {
+      res.render('movie/movies', {
         movies: multiMongooseToMoviesObject(movies),
       })
     })
@@ -26,7 +26,7 @@ class MoviesController {
   getShowingMovies(req, res) {
     const today = new Date()
     Movie.find({ release_date: { $lte: today } }, function (err, movies) {
-      res.render('movies/movies', {
+      res.render('movie/movies', {
         movies: multiMongooseToMoviesObject(movies),
       })
     })
