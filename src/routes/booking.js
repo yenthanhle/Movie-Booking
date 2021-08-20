@@ -4,10 +4,18 @@ const authMiddlewares = require('../app/middlewares/AuthMiddleware')
 const express = require('express')
 const router = express.Router()
 
-router.get('/:_id/detail', bookingController.detail)
-router.post('/payment/confirm', bookingController.storePayment)
-router.post('/payment', bookingController.showPayment)
-router.get('/:_id', authMiddlewares.requireAuth, bookingController.index)
+router.get('/:_id/detail', bookingController.index)
+router.post(
+  '/payment',
+  authMiddlewares.requireAuth,
+  bookingController.showPayment,
+)
+router.post(
+  '/payment/confirm',
+  authMiddlewares.requireAuth,
+  bookingController.storePayment,
+)
+router.get('/:_id', authMiddlewares.requireAuth, bookingController.showTimeline)
 
 // router.get('/', bookingController.index)
 

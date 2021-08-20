@@ -3,13 +3,7 @@ class LoginController {
   index(req, res) {
     res.render('login/login')
   }
-  // createAccount(req, res) {
-  //   const formData = req.body
-  //   const user = new User(formData)
-  //   console.log(user)
-  //   user.save()
-  //   res.redirect('/movies')
-  // }
+
   login(req, res) {
     User.findOne(
       { user_name: req.body.user_name, password: req.body.password },
@@ -18,7 +12,7 @@ class LoginController {
           // console.log(user)
           res.locals.user_name = user.user_name
           res.cookie('user_id', user._id.toString(), { signed: true })
-          res.redirect('/movie')
+          res.redirect('/')
         } else {
           res.render('login/login', {
             respond: {
@@ -38,7 +32,7 @@ class LoginController {
     const user = new User(formData)
     console.log(user)
     user.save()
-    res.redirect('/movie')
+    res.redirect('/')
   }
   signout(req, res) {
     res.clearCookie('user_id')
