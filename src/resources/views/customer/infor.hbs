@@ -1,0 +1,93 @@
+<div class="container mt-4 customer-infor">
+    <div class="left">
+        <div class="btn-group-vertical mt-4">
+            <a href="/customer/account" class="btn btn-success mt-4">
+                Thông tin chung
+            </a>
+            <a href="/customer/bill" class="btn btn-outline-success mt-4">
+                Hoá đơn
+            </a>
+
+        </div>
+    </div>
+    <div class="right">
+        <h2>Thông tin chung</h2>
+        <div class="customer-infor">
+            {{#if user}}
+            <form method="POST" action="/customer/account/{{user._id}}/edit?_method=PUT">
+                <div class=" input-group input-group-sm mb-3 ">
+                    <div class=" form-field">
+                        <label class="label">User name</label>
+                        <input readonly class="form-control input" id="user_name" name="user_name" type="text"
+                            value="{{user.user_name}}">
+                    </div>
+                    <div class=" form-field">
+
+                        <label class="label">Mật khẩu</label>
+                        <input readonly class="form-control input" id="password" name="password" type="password"
+                            value={{user.password}}>
+                        <i style="position: absolute; margin-left: 800px;  height: 80%;  opacity: 0.8"
+                            class="fa fa-fw fa-eye field-icon" onclick="passwordClickShowFunction(this)"></i>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="label">Ngày sinh</label>
+                        <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
+                            value={{user.date_of_birth}}>
+                    </div>
+                    <div class="form-field">
+                        <label class="label">Số điện thoại</label>
+                        <input readonly class="form-control input" id="phone_number" name="phone_number" type="text"
+                            value={{user.phone_number}}>
+                    </div>
+                    <div class="form-field">
+                        <label class="label">Thành phố / Tỉnh</label>
+                        <input readonly class="form-control input" id="address" name="address" type="text"
+                            value="{{user.address}}">
+                    </div>
+                    <button type="button" id="btnEdit" class="btn btn-outline-success" onclick="clickFunc(this)">Thay
+                        đổi thông tin</button>
+                    <a>
+                        <button type="submit" id="btnUpdate" class="btn btn-outline-success hidden">Cập
+                            nhật</button>
+                    </a>
+                    {{else}}
+                    <h2>ERROR!!!</h2>
+
+                </div>
+
+            </form>
+            {{/if}}
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function clickFunc(e) {
+        const user_name = document.querySelector('#user_name')
+        const password = document.querySelector('#password')
+        const date_of_birth = document.querySelector('#date_of_birth')
+        const address = document.querySelector('#address')
+        const phone_number = document.querySelector('#phone_number')
+        const btnUpdate = document.querySelector('#btnUpdate')
+        user_name.readOnly = false
+        password.readOnly = false
+        date_of_birth.readOnly = false
+        phone_number.readOnly = false
+        address.readOnly = false
+        e.classList.toggle('hidden')
+        btnUpdate.classList.toggle('hidden')
+    }
+    function passwordClickShowFunction(e) {
+
+        const password = document.querySelector('#password')
+        if (password.type == 'password')
+            password.type = 'text'
+        else
+            password.type = 'password'
+        e.classList.toggle('fa-eye-slash')
+        e.classList.toggle('fa-eye')
+
+    }
+</script>

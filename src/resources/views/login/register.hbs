@@ -9,6 +9,8 @@
         <div class="col-md-10 mt-4 form-row">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <i style="position: absolute; margin-left: 300px; height: 80%; opacity: 0.8"
+                class="fa fa-fw fa-eye field-icon" onclick="passwordClickShowFunction(this)"></i>
             <small id="passwordHelpInline" class="text-muted ml-4">
                 Must contain number, uppercase, lowercase and special character.
             </small>
@@ -17,6 +19,8 @@
         <div class="form-group col-md-10 mt-4 form-row">
             <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
             <input type="password" class="form-control" id="password_confirmation" required>
+            <i style="position: absolute; margin-left: 300px; height: 80%; opacity: 0.8;"
+                class="fa fa-fw fa-eye field-icon" onclick="passwordClickShowFunction(this)"></i>
             <div class="invalid-feedback ml-4 form-message"></div>
         </div>
         <div class="form-row">
@@ -77,5 +81,17 @@
 
         ]
     })
+
+    function passwordClickShowFunction(e) {
+
+        const password = e.closest('div').querySelector('input')  // password or confirm password
+        if (password.type == 'password')
+            password.type = 'text'
+        else
+            password.type = 'password'
+        e.classList.toggle('fa-eye-slash')
+        e.classList.toggle('fa-eye')
+
+    }
 
 </script>

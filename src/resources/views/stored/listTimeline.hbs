@@ -36,9 +36,9 @@
                             class="btn-outline-primary ml-4 mr-4">Sửa</a>
                         --}}
                         <div class="flex">
-                            <button type="button" class="btn-edit button btn-outline-primary mr-3"
+                            <button type="button" class="btnEdit button btn-outline-primary mr-3"
                                 onclick="clickFunc(this)">Sửa</button>
-                            <button type="submit" id="btn-update" class="btn-secondary mr-3 hidden">Cập
+                            <button type="submit" id="btnUpdate" class="btn-secondary mr-3 hidden">Cập
                                 nhật</button>
                             <button href="" class="btn-outline-primary " data-id={{this._id}} data-toggle="modal"
                                 data-target="#deleteModal">Xoá</button>
@@ -84,7 +84,7 @@
         const tdDate = e.closest('tr').querySelector('.td-date')
         const tdTime = e.closest('tr').querySelector('.td-time')
         const tdRoom = e.closest('tr').querySelector('.td-room')
-        const btnUpdate = e.closest('td').querySelector('#btn-update')
+        const btnUpdate = e.closest('td').querySelector('#btnUpdate')
         btnUpdate.classList.toggle('hidden')
         e.classList.toggle('hidden')
         tdDate.readOnly = false

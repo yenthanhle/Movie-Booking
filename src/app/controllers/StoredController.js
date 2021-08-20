@@ -1,5 +1,5 @@
-const Movies = require('../models/movie')
-const Theaters = require('../models/theater')
+const Movie = require('../models/movie')
+const Theater = require('../models/theater')
 const Timeline = require('../models/timeline')
 const async = require('async')
 const {
@@ -12,7 +12,7 @@ const {
 } = require('../util/mongoose')
 class StoredController {
   index(req, res) {
-    Movies.find({}, function (err, movies) {
+    Movie.find({}, function (err, movies) {
       res.render('stored/listMovie', {
         movies: multiMongooseToMoviesObject(movies),
       })
@@ -23,31 +23,31 @@ class StoredController {
   }
   storeMovie(req, res) {
     const formData = req.body
-    const movie = new Movies(formData)
+    const movie = new Movie(formData)
     movie.save()
     res.redirect('/stored/movies')
   }
   editMovie(req, res, next) {
-    Movies.findById(req.params._id)
+    Movie.findById(req.params._id)
       .then((movie) =>
         res.render('stored/editMovie', { movie: mongooseToMovieObject(movie) }),
       )
       .catch(next)
   }
   updateMovie(req, res, next) {
-    Movies.updateOne({ _id: req.params._id }, req.body)
+    Movie.updateOne({ _id: req.params._id }, req.body)
       .then(() => res.redirect('/stored/movies'))
       .catch(next)
   }
   showTimeline(req, res) {
-    const searchFunc = function search(input, cb) {
+    const searchFunc = function search(input, callback) {
       async.parallel(
         {
           movie: function (callback) {
-            Movies.findById(input.movie_id, callback)
+            Movie.findById(input.movie_id, callback)
           },
           theater: function (callback) {
-            Theaters.findById(input.theater_id, callback)
+            Theater.findById(input.theater_id, callback)
           },
         },
         function (err, result) {
@@ -58,7 +58,7 @@ class StoredController {
           resultTemp.theater = result.theater.name
           resultTemp.time = input.time
           resultTemp.room = input.room
-          return cb(resultTemp)
+          return callback(resultTemp)
         },
       )
     }
