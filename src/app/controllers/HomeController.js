@@ -1,8 +1,10 @@
 const Movie = require('../models/movie')
 const { multiMongooseToMoviesObject } = require('../util/mongoose')
+const openSocket = require('socket.io-client')
 class HomeController {
   index(req, res) {
     res.render('home')
+    openSocket('http://localhost:3000')
   }
   getCommingMovies(req, res) {
     const today = new Date()

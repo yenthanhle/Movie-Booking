@@ -164,25 +164,28 @@
             <div class="cell cell-couple"></div>
         </div>
     </div>
-    <form class="booking-detail mt-4" method="POST" action="/booking/payment">
+    <form class="booking-detail mt-4 ml-0" method="POST" action="/booking/payment">
 
-        <div class="form-field">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Id</label>
             <input readonly type="text" class="form-control" name="timeline_id" value={{id}}>
         </div>
-        <div class="form-field">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Số vé</label>
             <input readonly type="text" class="form-control" id="seat_count" name="seat_count" value='0'>
         </div>
-        <div class="form-field col-5">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Ghế</label>
             <input readonly type="text" class="form-control" id="seat_name" name="seat_name" value=''>
         </div>
-        <div class="form-field col-5">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Tổng tiền</label>
             <input readonly type="text" class="form-control" id="payment" name="payment" value='0'>
         </div>
-        <button type="submit">Thanh toán</button>
+        <div class="form-field mt-4">
+            <button type="submit">Thanh toán</button>
+
+        </div>
     </form>
 </div>
 

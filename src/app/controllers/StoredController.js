@@ -124,6 +124,14 @@ class StoredController {
       .then(() => res.redirect('/stored/timelines'))
       .catch(next)
   }
+
+  deleteTimeline(req, res) {
+    const timelineId = req.params._id
+    console.log(timelineId)
+    Timeline.deleteOne({ _id: timelineId }).then(() =>
+      res.redirect('/stored/timelines'),
+    )
+  }
 }
 
 module.exports = new StoredController()

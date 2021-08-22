@@ -7,7 +7,6 @@ const db = require('../src/config/db')
 const methodOverride = require('method-override')
 const middleware = require('./app/middlewares/AuthMiddleware')
 const port = 3000
-db.connect()
 const app = express()
 app.use(methodOverride('_method'))
 app.use(cookieParser('YTmovie'))
@@ -15,7 +14,6 @@ app.use(cookieParser('YTmovie'))
 app.use(express.json())
 app.use(middleware.showUserName)
 app.use(express.static(path.join(__dirname, 'public')))
-
 // For post py fetch, httpRequest,...
 app.use(
   express.urlencoded({
@@ -30,7 +28,10 @@ routes(app)
 app.get('/', function (req, res) {
   res.render('home')
 })
-
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`)
-})
+db.connect()
+  .then((result) => {
+    const server = app.listen(port)
+    const io = require('socket.io')(server)
+    io.on('connection', (socket) => console.log('Connected!!!'))
+  })
+  .catch((err) => console.log(err))

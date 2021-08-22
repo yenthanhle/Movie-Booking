@@ -81,7 +81,7 @@ class BookingController {
   //  [POST] booking/payment
   showPayment(req, res, next) {
     const formData = req.body
-    formData.user_id = req.cookies.user_id
+    formData.user_id = req.signedCookies.user_id
     formData.seat_name = formData.seat_name.trim()
     formData.time_created = new Date().toLocaleDateString()
     console.log(formData)

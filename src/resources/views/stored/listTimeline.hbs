@@ -18,42 +18,42 @@
         <tbody>
             {{#each timelines}}
             <tr>
-                <form method="POST" action="/stored/timelines/{{this._id}}?_method=PUT">
-                    <th scope=" row">{{@index}}</th>
-                    <td>{{this.movie}}</td>
-                    <td id="theater-{{@index}}">{{this.theater}}</td>
-                    <td>
-                        <input class="td-date" type="date" name="date" readonly value={{this.date}}>
-                    </td>
-                    <td>
-                        <input class="td-time" type="time" name="time" readonly value={{this.time}}>
-                    </td>
-                    <td>
-                        <input class="td-room" type="number" name="room" readonly value={{this.room}}>
-                    </td>
-                    <td>
-                        {{!-- <a href="/stored/timelines/{{this._id}}/edit"
-                            class="btn-outline-primary ml-4 mr-4">Sửa</a>
-                        --}}
-                        <div class="flex">
-                            <button type="button" class="btnEdit button btn-outline-primary mr-3"
-                                onclick="clickFunc(this)">Sửa</button>
-                            <button type="submit" id="btnUpdate" class="btn-secondary mr-3 hidden">Cập
-                                nhật</button>
-                            <button href="" class="btn-outline-primary " data-id={{this._id}} data-toggle="modal"
-                                data-target="#deleteModal">Xoá</button>
+                <th scope=" row">{{@index}}</th>
+                <td>{{this.movie}}</td>
+                <td id="theater-{{@index}}">{{this.theater}}</td>
+                <td>
+                    <input class="td-date" type="date" id="date" readonly value={{this.date}}>
+                </td>
+                <td>
+                    <input class="td-time" type="time" id="time" readonly value={{this.time}}>
+                </td>
+                <td>
+                    <input class="td-room" type="number" id="room" readonly value={{this.room}}>
+                </td>
+                <td>
+                    {{!-- <a href="/stored/timelines/{{this._id}}/edit" class="btn-outline-primary ml-4 mr-4">Sửa</a>
+                    --}}
+                    <div class="flex">
+                        <button type="button" class="btnEdit button btn-outline-primary mr-3"
+                            onclick="clickEdit(this)">Sửa</button>
+                        <button type="button" id="btnUpdate" class="btn-secondary mr-3 hidden" data-id={{this._id}}
+                            onclick="clickUpdate(this)">Cập nhật</button>
+                        <button type="button" class="btn-outline-primary " data-id={{this._id}} data-toggle="modal"
+                            data-target="#deleteModal">Xoá</button>
 
-                        </div>
-                    </td>
-                </form>
-
+                    </div>
+                </td>
             </tr>
             {{/each}}
-
         </tbody>
     </table>
 
 </div>
+<form method="POST" name="updateForm">
+    <input type="date" id="name" name="date">
+    <input type="time" id="time" name="time">
+    <input type="number" id="room" name="room">
+</form>
 <form method="POST" name="deleteForm"></form>
 
 <!-- Delete confirm -->
@@ -61,7 +61,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete Course</h5>
+                <h5 class="modal-title">Delete Timeline</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -71,16 +71,32 @@
             </div>
             <div class="modal-footer">
                 <button id="btnDelete" type="button" class="btn btn-danger">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="buttonCancel" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
-
-
 <script>
-
-    function clickFunc(e) {
+    // wait for load all content (css, jquery,...)
+    document.addEventListener("DOMContentLoaded", function () {
+        var deleteId
+        const btnDelete = document.getElementById('btnDelete')
+        var deleteForm = document.forms['deleteForm']
+        // while show dialog
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            console.log('id')
+            var button = $(event.relatedTarget)
+            deleteId = button.data('id')
+        })
+        // click btn delete
+        btnDelete.onclick = function (event) {
+            deleteForm.action = `/stored/timelines/${deleteId}?_method=DELETE`
+            deleteForm.submit()
+        }
+    })
+</script>
+<script>
+    function clickEdit(e) {
         const tdDate = e.closest('tr').querySelector('.td-date')
         const tdTime = e.closest('tr').querySelector('.td-time')
         const tdRoom = e.closest('tr').querySelector('.td-room')
@@ -90,30 +106,20 @@
         tdDate.readOnly = false
         tdTime.readOnly = false
         tdRoom.readOnly = false
-        e.preventDefault()
     }
 
-
-</script>
-
-<script>
-    // wait for load all content (css, jquery,...)
-    document.addEventListener("DOMContentLoaded", function () {
-        var deleteId
-        const btnDelete = document.getElementById('btnDelete')
-        var deleteForm = document.forms['deleteForm']
-
-        // while show dialod
-        document.querySelector('#deleteModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            deleteId = button.data('id')
-        })
-
-        // click btn delete
-        btnDelete.onclick = function (event) {
-            deleteForm.action = `stored/timelines/${deleteId}?_method=DELETE`
-            deleteForm.submit()
-        }
-    })
-
+    function clickUpdate(e) {
+        var updateForm = document.forms['updateForm']
+        const deleteId = e.getAttribute('data-id')
+        const tr = e.closest('tr')
+        const date = tr.querySelector('input#date').value
+        const time = tr.querySelector('input#time').value
+        const room = tr.querySelector('input#room').value
+        console.log(updateForm.querySelector("input#date"))
+        updateForm.querySelector("input").value = date
+        updateForm.querySelector("input:nth-child(2)").value = time
+        updateForm.querySelector("input:nth-child(3)").value = room
+        updateForm.action = `/stored/timelines/${deleteId}?_method=PUT`
+        updateForm.submit()
+    }
 </script>

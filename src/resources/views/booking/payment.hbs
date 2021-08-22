@@ -1,29 +1,31 @@
 <div class="container">
     <form class="film-input" method="POST" action="/booking/payment/confirm">
-        <div class="form-field">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Mã user</label>
-            <input type="text" class="form-control" name="user_id" value={{infor.user_id}} readonly>
+            <input type="text" class="form-control" name="user_id" readonly value={{infor.user_id}}>
         </div>
-        <div class="form-field">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Mã lịch chiếu</label>
-            <input type="text" class="form-control" name="timeline_id" value={{infor.timeline_id}} readonly>
+            <input type="text" class="form-control" name="timeline_id" readonly value={{infor.timeline_id}}>
         </div>
-        <div class="form-field">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Ngày thanh toán</label>
-            <input type="text" class="form-control" value={{infor.time_created}} readonly>
+            <input type="text" class="form-control" readonly value={{infor.time_created}}>
         </div>
-        <div class="form-field">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Số vé</label>
-            <input type="text" class="form-control" name="seat_count" value={{infor.seat_count}} readonly>
+            <input type="text" class="form-control" name="seat_count" readonly value={{infor.seat_count}}>
         </div>
-        <div class="form-field col-5">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Ghế</label>
-            <input type="text" class="form-control" name="seat_name" value="{{infor.seat_name}}" readonly>
+            <input type="text" class="form-control" name="seat_name" readonly value="{{infor.seat_name}}">
         </div>
-        <div class="form-field col-5">
+        <div class="form-field mt-4 ml-0">
             <label class="label">Tổng tiền</label>
-            <input type="text" class="form-control" name="payment" value={{infor.payment}} readonly>
+            <input type="text" class="form-control" name="payment" readonly value={{infor.payment}}>
         </div>
-        <button type="submit">Thanh toán</button>
+        <div class="form-field mt-4 ml-0">
+            <button type="submit">Thanh toán</button>
+        </div>
     </form>
 </div>
