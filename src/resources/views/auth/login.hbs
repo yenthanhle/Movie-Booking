@@ -1,34 +1,34 @@
 <div class="container mt-4">
-    {{#if respond.error}}
+    {{#if error}}
     <div class="alert alert-danger" role="alert">
-        {{respond.error}}
+        {{error}}
     </div>
     {{/if}}
-    <form method="POST" action="/account" id="form-login" class="form-inline">
+    <form method="POST" action="/auth/login" id="form-login" class="form-inline">
         <div class="form-group col-md-10 mt-4 form-row">
             <label for="user_name" class="col-sm-2 col-form-label">User name</label>
-            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="User name" required
-                value={{respond.input.user_name}}>
+            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="User name or email"
+                required value="{{oldInput.user_name}}">
             <div class="invalid-feedback form-message"></div>
         </div>
 
         <div class="col-md-10 mt-4 form-row">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required
-                value={{respond.input.password}}>
+                value={{oldInput.password}}>
             <i style="position: absolute; margin-left: 300px;  height: 80%; opacity: 0.8"
-                class="fa fa-fw fa-eye field-icon" onclick="passwordClickShowFunction(this)"></i>
+                class="fa fa-fw fa-eye-slash field-icon" onclick="passwordClickShowFunction(this)"></i>
             <div class="invalid-feedback  ml-4 form-message"> </div>
         </div>
         <div class="form-group col-md-10 mt-4 form-row">
-            <a href="/account/register">Create account</a>
-
+            <a href="/auth/signup">Create account</a>
         </div>
         <div class="form-group col-md-10 mt-4 form-row">
             <button type="submit" class="btn btn-primary">Log in</button>
-
         </div>
-
+        <div class="form-group col-md-10 mt-4 form-row">
+            <a href="/auth/reset">Forget password</a>
+        </div>
     </form>
 </div>
 

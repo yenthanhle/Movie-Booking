@@ -22,12 +22,11 @@
                             value="{{user.user_name}}">
                     </div>
                     <div class=" form-field">
-
                         <label class="label">Mật khẩu</label>
                         <input readonly class="form-control input" id="password" name="password" type="password"
                             value={{user.password}}>
                         <i style="position: absolute; margin-left: 800px;  height: 80%;  opacity: 0.8"
-                            class="fa fa-fw fa-eye field-icon" onclick="passwordClickShowFunction(this)"></i>
+                            class="fa fa-fw fa-eye-slash field-icon mt-3" onclick="passwordClickShowFunction(this)"></i>
                     </div>
 
                     <div class="form-field">
@@ -45,6 +44,8 @@
                         <input readonly class="form-control input" id="address" name="address" type="text"
                             value="{{user.address}}">
                     </div>
+                    <button type="button" id="btnAva" class="btn btn-outline-success" onclick="">Cập nhật ảnh đại
+                        diện</button>
                     <button type="button" id="btnEdit" class="btn btn-outline-success" onclick="clickFunc(this)">Thay
                         đổi thông tin</button>
                     <a>

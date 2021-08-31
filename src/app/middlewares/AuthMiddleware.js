@@ -1,20 +1,29 @@
 const User = require('../models/user')
+const session = require('express-session')
+
 const { mongooseToObject } = require('../util/mongoose')
 
 function requireAuth(req, res, next) {
-  if (!req.signedCookies.user_id) {
-    res.redirect('/account')
+  if (!req.session.isLoggedIn) {
+    res.redirect('/auth/login')
     return
   }
-  User.findOne({ _id: req.signedCookies.user_id }, function (err, user) {
+  User.findOne({ _id: req.session.user._id }, function (err, user) {
     if (!user) {
-      res.render('login/login', {
+      return res.render('auth/login', {
         respond: {
           input: req.body,
           error: 'Username or password is wrong!!!',
         },
       })
-      return
+    }
+    if (!user.isActive) {
+      res.render('auth/login', {
+        respond: {
+          input: req.body,
+          error: 'Please verify your email to start using YT movie booking!!!',
+        },
+      })
     }
     next()
   })
@@ -22,10 +31,10 @@ function requireAuth(req, res, next) {
 
 // Show username in header if logged in
 function showUserName(req, res, next) {
-  if (!req.signedCookies.user_id) {
+  if (!req.session.isLoggedIn) {
     next()
   } else {
-    User.findOne({ _id: req.signedCookies.user_id }, function (err, user) {
+    User.findOne({ _id: req.session.user._id }, function (err, user) {
       if (!user) return
       // save user to load user name
       else {

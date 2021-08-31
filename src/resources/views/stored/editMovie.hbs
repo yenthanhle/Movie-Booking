@@ -7,29 +7,29 @@
             </div>
             <div class="form-field form-group col-5">
                 <label class="label">Thể loại</label>
-                <input type="text" class="form-control"value="{{movie.genre}}" name="genre">
+                <input type="text" class="form-control" value="{{movie.genre}}" name="genre">
             </div>
         </div>
 
         <div class="row mt-4">
             <div class="form-field form-group col-5">
                 <label class="label">Thời lượng</label>
-                <input type="text" class="form-control"value="{{movie.duration}}" name="duration">
+                <input type="text" class="form-control" value={{movie.duration}} name="duration">
             </div>
             <div class="form-field col-5">
                 <label class="label">Ngày khởi chiếu</label>
-                <input type="date" class="form-control"value="{{movie.release_date}}" name="release_date">
+                <input type="date" class="form-control" value={{movie.release_date}} name="release_date">
             </div>
         </div>
 
         <div class="row mt-4">
             <div class="form-field col-5">
                 <label class="label">Đạo diễn</label>
-                <input type="text" class="form-control"value="{{movie.director}}" name="director">
+                <input type="text" class="form-control" value="{{movie.director}}" name="director">
             </div>
             <div class="form-field col-5">
                 <label class="label">Diễn viên</label>
-                <input type="text" class="form-control"value="{{movie.actor}}" name="actor">
+                <textarea type="text" class="form-control" name="actor">{{movie.actor}}</textarea>
             </div>
         </div>
 
@@ -40,18 +40,18 @@
             </div>
             <div class="form-field col-5">
                 <label class="label">Quốc gia</label>
-                <input type="text" class="form-control"value="{{movie.country}}" name="country">
+                <input type="text" class="form-control" value="{{movie.country}}" name="country">
             </div>
         </div>
 
         <div class="row mt-4">
             <div class="form-field col-5">
                 <label class="label">Đánh giá</label>
-                <input type="text" class="form-control"value="{{movie.rating}}" name="rating">
+                <input type="text" class="form-control" value="{{movie.rating}}" name="rating">
             </div>
             <div class="form-field col-5">
                 <label class="label">Số lượt bán</label>
-                <input type="text" class="form-control"value="{{movie.sold_ticket}}" name="sold_ticket">
+                <input type="text" class="form-control" value="{{movie.sold_ticket}}" name="sold_ticket">
             </div>
         </div>
 
@@ -62,7 +62,7 @@
             </div>
             <div class="form-field col-5">
                 <label class="label">Link trailer</label>
-                <input type="text" class="form-control"value="{{movie.trailer}}" name="trailer">
+                <input type="text" class="form-control" value="{{movie.trailer}}" name="trailer">
             </div>
         </div>
 

@@ -9,9 +9,6 @@
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/movie/booking">Đặt vé</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/stored/movies">Quản lý phim</a>
                 </li>
             </ul>
@@ -29,13 +26,15 @@
                         <li><a class="dropdown-item" href="/customer/account">Tài khoản của tôi</a></li>
                         <li><a class="dropdown-item" href="/customer/bill">Vé của tôi</a></li>
                         <div class="dropdown-divider"></div>
-                        <li><a class="dropdown-item" href="/account/sign-out">Đăng xuất</a></li>
+                        <li><a class="dropdown-item" href="/auth/signout">Đăng xuất</a></li>
                     </ul>
                 </li>
                 {{else}}
-                <img src="https://scontent.fvca1-1.fna.fbcdn.net/v/t1.6435-9/109772727_1167914386910866_2658107042118001181_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=1fxxGDrdcQ8AX90VpgR&_nc_oc=AQmlphIUc8F4DHhZ-pTI5UmJ1O1TyqJEoZuKUhdEEc9sUODTGd6bnAF98-QaUXyGcNw&_nc_ht=scontent.fvca1-1.fna&oh=106053c15a900995a64cce6195dd2a55&oe=612D08B4"
-                    alt="" class="user-avatar">
-                <a type="button" class="btn btn-primary" href="/account">Đăng nhập</a>
+                {{#unless isLogging}}
+                <img src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" alt=""
+                    class="user-avatar">
+                <a type="button" class="btn btn-primary" href="/auth/login">Đăng nhập</a>
+                {{/unless}}
                 {{/if}}
                 </li>
             </ul>

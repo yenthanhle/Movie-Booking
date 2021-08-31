@@ -1,46 +1,63 @@
 <div class="container">
-    <form class="film-input" method="POST" action="/stored/timelines/createTimeline">
-        <div class="row mt-4">
-            <div class="select-panel">
-                <div class="label">Chọn rạp</div>
-                <select name='theater_id'>
-                    {{#each results.theaterList}}
-                    <option value={{this._id}}>{{this.name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <div class="select-panel">
-                <div class="label">Chọn phim</div>
-                <select name="movie_id">
-                    {{#each results.movieList}}
-                    <option value={{this._id}} name="movie_id">{{this.name}}</option>
-                    {{/each}}
-                </select>
-            </div>
+    <form id="form-create-timeline" class="form-inline" method="POST" action="/stored/timelines/create">
+        <div class="form-group col-md-10 mt-4 form-row">
+            <label for="user_name" class="label">Chọn rạp</label>
+            <select name='theater_id' class="form-control" id="theater">
+                {{#each results.theaterList}}
+                <option value={{this._id}}>{{this.name}}</option>
+                {{/each}}
+            </select>
         </div>
-
-        <div class="row mt-4">
+        <div class="form-group col-md-10 mt-4 form-row">
+            <label for="user_name" class="label">Chọn phim</label>
+            <select name="movie_id" class="form-control">
+                {{#each results.movieList}}
+                <option value={{this._id}} name="movie_id">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group col-md-10 mt-4 form-row">
             <div class="form-field form-group col-5">
                 <label class="label">Ngày chiếu</label>
-                <input type="date" class="form-control" name="date">
+                <input id="date" type="date" class="form-control" name="date" required>
+                <div class="invalid-feedback form-message"></div>
+
             </div>
+        </div>
+        <div class="form-group col-md-10 mt-4 form-row">
             <div class="form-field col-5">
                 <label class="label">Giờ chiếu</label>
-                <input type="time" class="form-control" name="time">
+                <input id="time" type="time" class="form-control" name="time" required>
+                <div class="invalid-feedback form-message"></div>
+
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="form-group col-md-10 mt-4 form-row">
             <div class="form-field col-5">
                 <label class="label">Phòng</label>
-                <input type="text" class="form-control" name="room">
+                <input id="room" type="number" class="form-control" name="room" required>
+                <div class="invalid-feedback form-message"></div>
             </div>
-
         </div>
-
-        <button type="submit" class="btn btn-success">Tạo lịch chiếu</button>
+        <div class="form-group col-md-10 mt-4 form-row">
+            <button type="submit" class="btn btn-success">Tạo lịch chiếu</button>
+        </div>
     </form>
 </div>
+<script src="/validators/loginValidator.js"></script>
+<script>
+    Validator({
+        form: '#form-create-timeline',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#date', 'Chọn ngày'),
+            Validator.isRequired('#time', 'Chọn giờ'),
+            Validator.isRequired('#room', 'Chọn phòng'),
+
+        ]
+    })
+</script>
 
 <style>
     .select-panel {

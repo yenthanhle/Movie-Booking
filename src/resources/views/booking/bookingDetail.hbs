@@ -1,3 +1,12 @@
+{{!--
+<script>
+    const openSocket = require('socket.io-client')
+    const socket = openSocket('http://localhost:3000');
+    socket.on('booked', data => {
+        alert(data)
+    })
+
+</script> --}}
 <div class="container booking">
 
     <div class="seat-position">
@@ -183,7 +192,7 @@
             <input readonly type="text" class="form-control" id="payment" name="payment" value='0'>
         </div>
         <div class="form-field mt-4">
-            <button type="submit">Thanh toán</button>
+            <button type="submit" class="btn btn-success">Thanh toán</button>
 
         </div>
     </form>
@@ -222,6 +231,5 @@
             }
         }
     }
-
 
 </script>

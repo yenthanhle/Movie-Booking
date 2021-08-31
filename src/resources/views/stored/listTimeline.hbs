@@ -1,8 +1,7 @@
 <div class="container">
-
-    <a href="/stored/movies/timeline/editTimeline" class="btn btn-outline-primary ml-4 mr-4 mt-4">Sửa lịch chiếu</a>
-
-
+    <a href="/stored/timelines/create">
+        <button class="btn btn-success mt-4 mb-4">Thêm lịch chiếu</button>
+    </a>
     <table class="table">
         <thead>
             <tr>
@@ -17,6 +16,7 @@
         </thead>
         <tbody>
             {{#each timelines}}
+            {{#if this.movie}}
             <tr>
                 <th scope=" row">{{@index}}</th>
                 <td>{{this.movie}}</td>
@@ -34,27 +34,28 @@
                     {{!-- <a href="/stored/timelines/{{this._id}}/edit" class="btn-outline-primary ml-4 mr-4">Sửa</a>
                     --}}
                     <div class="flex">
-                        <button type="button" class="btnEdit button btn-outline-primary mr-3"
+                        <button type="button" class="button btn-outline-primary mr-3"
                             onclick="clickEdit(this)">Sửa</button>
-                        <button type="button" id="btnUpdate" class="btn-secondary mr-3 hidden" data-id={{this._id}}
-                            onclick="clickUpdate(this)">Cập nhật</button>
+                        <button type="button" id="btnUpdate" class="button btn-outline-primary mr-3 hidden"
+                            data-id={{this._id}} onclick="clickUpdate(this)">Cập nhật</button>
                         <button type="button" class="btn-outline-primary " data-id={{this._id}} data-toggle="modal"
                             data-target="#deleteModal">Xoá</button>
 
                     </div>
                 </td>
             </tr>
+            {{/if}}
             {{/each}}
         </tbody>
     </table>
 
 </div>
-<form method="POST" name="updateForm">
+<form method="POST" name="updateForm" class="hidden">
     <input type="date" id="name" name="date">
     <input type="time" id="time" name="time">
     <input type="number" id="room" name="room">
 </form>
-<form method="POST" name="deleteForm"></form>
+<form method="POST" name="deleteForm" class="hidden"></form>
 
 <!-- Delete confirm -->
 <div id="deleteModal" class="modal" tabindex="-1" role="dialog">

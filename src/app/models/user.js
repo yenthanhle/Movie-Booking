@@ -8,16 +8,26 @@ const ObjectId = Schema.ObjectId
 const schema = new Schema(
   {
     user_name: String,
+    email: String,
     password: String,
+    resetToken: String,
+    resetTokenExpiration: Date,
     gender: String,
     date_of_birth: String,
     phone_number: String,
     address: String,
-    // If no path is given, all date fields will be applied
+    verifyToken: String,
+    isActive: Boolean,
+    subDocument: {
+      subDate: {
+        type: Date,
+      },
+    },
   },
   {
     timestamps: true,
     collection: 'user',
   },
 )
+schema.plugin(timeZone, { paths: ['date', 'subDocument.subDate'] })
 module.exports = mongoose.model('Users', schema)

@@ -12,6 +12,49 @@
     </div>
     <div class="right">
         <h2>Thông tin hoá đơn</h2>
+        <div class="customer-infor">
+            {{#if user}}
+            <div class=" input-group input-group-sm mb-3 ">
 
+                <div class=" form-field">
+                    <label class="label">Mã hoá đơn</label>
+                    <input readonly class="form-control input" id="text" value={{bill._id}}>
+                </div>
+
+                <div class="form-field">
+                    <label class="label">Ngày tạo</label>
+                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
+                        value={{bill.time_created}}>
+                </div>
+                {{!-- <div class="form-field">
+                    <label class="label">Tên phim</label>
+                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
+                        value={{bill.date_of_birth}}>
+                </div>
+                <div class="form-field">
+                    <label class="label">Ngày chiếu</label>
+                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
+                        value={{bill.date_of_birth}}>
+                </div>
+                <div class="form-field">
+                    <label class="label">Tên rạp</label>
+                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
+                        value={{bill.date_of_birth}}>
+                </div>
+                <div class="form-field">
+                    <label class="label">Phòng</label>
+                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
+                        value={{bill.date_of_birth}}>
+                </div> --}}
+                <div class="form-field">
+                    <label class="label">Tên ghế</label>
+                    <input readonly class="form-control input" id="address" name="address" type="text"
+                        value="{{bill.seat_name}}">
+                </div>
+                {{else}}
+                <h2>ERROR!!!</h2>
+            </div>
+            {{/if}}
+        </div>
     </div>
 </div>

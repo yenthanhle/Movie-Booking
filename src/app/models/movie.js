@@ -9,7 +9,7 @@ const schema = new Schema(
     name: String,
     genre: String,
     duration: Number,
-    release_date: Date,
+    release_date: String,
     director: String,
     actor: String,
     description: String,

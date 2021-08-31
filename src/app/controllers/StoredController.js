@@ -4,43 +4,96 @@ const Timeline = require('../models/timeline')
 const async = require('async')
 const {
   multiMongooseToMoviesObject,
-  mongooseToMovieObject,
   multiMongooseToObject,
   mongooseToObject,
   mongooseDateToTime,
-  mongooseDateToDate,
 } = require('../util/mongoose')
+
 class StoredController {
-  index(req, res) {
-    Movie.find({}, function (err, movies) {
-      res.render('stored/listMovie', {
-        movies: multiMongooseToMoviesObject(movies),
+  // [GET] stored/movies
+  getMovies(req, res) {
+    Movie.find({})
+      .then((movies) => {
+        res.render('stored/listMovie', {
+          movies: multiMongooseToMoviesObject(movies),
+          pageTitle: 'Show Movie List',
+          path: '/stored/movies',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
+        })
       })
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
+  }
+  // [GET] stored/movies/create
+  getCreateMovie(req, res) {
+    res.render('stored/createMovie', {
+      pageTitle: 'Create Movie',
+      path: '/stored/movies/create',
+      // editing: editMode,
+      isAuthenticated: req.session.isLoggedIn,
     })
   }
-  createMovie(req, res) {
-    res.render('stored/createMovie')
-  }
-  storeMovie(req, res) {
+  // [POST] stored/movies/create
+  postCreateMovie(req, res) {
     const formData = req.body
     const movie = new Movie(formData)
-    movie.save()
-    res.redirect('/stored/movies')
+    movie
+      .save()
+      .then(() => res.redirect('/stored/movies'))
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
-  editMovie(req, res, next) {
+  // [GET] stored/movies/:_id/edit
+  getEditMovie(req, res, next) {
     Movie.findById(req.params._id)
-      .then((movie) =>
-        res.render('stored/editMovie', { movie: mongooseToMovieObject(movie) }),
-      )
-      .catch(next)
+      .then((movie) => {
+        console.log(movie)
+        res.render('stored/editMovie', {
+          movie: mongooseToObject(movie),
+          pageTitle: 'Edit Movie',
+          path: '/stored/movies/:id/edit',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
+        })
+      })
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
-  updateMovie(req, res, next) {
+  // [PUT] stored/movies/:_id
+  putEditMovie(req, res, next) {
     Movie.updateOne({ _id: req.params._id }, req.body)
       .then(() => res.redirect('/stored/movies'))
-      .catch(next)
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
-  showTimeline(req, res) {
+  // [DELETE] stored/movies/:_id
+  postDeleteMovie(req, res, next) {
+    const movieId = req.params._id
+    Movie.deleteOne({ _id: movieId })
+      .then(() => res.redirect('/stored/movies'))
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
+  }
+  // [GET] stored/timelines
+  getTimelines(req, res) {
     const searchFunc = function search(input, callback) {
+      // find movie and theater name
       async.parallel(
         {
           movie: function (callback) {
@@ -63,60 +116,84 @@ class StoredController {
       )
     }
 
-    Timeline.find({}, function (err, timelines) {
-      var result = []
-      var timelineList = multiMongooseToObject(timelines)
-      timelineList.map((timeline) =>
-        searchFunc(timeline, (params) => {
-          // convert date in mongoose to time and date
-          // console.log('Time: ', params.time)
-          params.date = params.time.toLocaleDateString('en-CA')
-          params.time = mongooseDateToTime(params.time)
-          result.push({ ...params })
-        }),
-      )
-      res.render('stored/listTimeline', { timelines: result })
-    })
+    Timeline.find({})
+      .then((timelines) => {
+        var result = []
+        var timelineList = multiMongooseToObject(timelines)
+        timelineList.map((timeline) =>
+          searchFunc(timeline, (params) => {
+            // convert date in mongoose to time and date
+            params.date = params.time.toLocaleDateString('en-CA')
+            params.time = mongooseDateToTime(params.time)
+            result.push({ ...params })
+          }),
+        )
+        res.render('stored/listTimeline', {
+          timelines: result,
+          pageTitle: 'Show Timeline List',
+          path: '/stored/timelines',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
+        })
+      })
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
-  createTimeline(req, res) {
+  // [GET] stored/timelines/create
+  getCreateTimeline(req, res) {
     async.parallel(
       {
         movieList: function (callback) {
-          Movies.find({}, callback)
+          Movie.find({}, callback)
         },
         theaterList: function (callback) {
-          Theaters.find({}, callback)
+          Theater.find({}, callback)
         },
       },
       function (err, results) {
         results.movieList = multiMongooseToMoviesObject(results.movieList)
         results.theaterList = multiMongooseToObject(results.theaterList)
-        res.render('stored/createTimeline', { results })
+        res.render('stored/createTimeline', {
+          results: results,
+          pageTitle: 'Create Timeline',
+          path: '/stored/timelines/create',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
+        })
       },
     )
   }
-
-  storeTimeline(req, res) {
+  // [POST] stored/timelines/create
+  postCreateTimeline(req, res) {
     const formData = req.body
     formData.time = new Date(formData.date + ' ' + formData.time)
     delete formData.date
     const timeline = new Timeline(formData)
     timeline.save()
-    res.redirect('/stored/movies')
+    res.redirect('/stored/timelines')
   }
-  editTimeline(req, res, next) {
+  // [GET] stored/timelines/:_id/edit
+  getEditTimeline(req, res, next) {
     Timeline.findById(req.params._id)
       .then((result) => {
         const timeline = mongooseToObject(result)
         timeline.date = timeline.time.toLocaleDateString('en-CA')
         timeline.time = mongooseDateToTime(timeline.time)
-        // console.log(timeline)
-        res.render('stored/editTimeline', { timeline: timeline })
+        res.render('stored/editTimeline', {
+          timeline: timeline,
+          pageTitle: 'Edit Timeline',
+          path: '/stored/timelines/:id/edit',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
+        })
       })
       .catch(next)
   }
-
-  updateTimeline(req, res, next) {
+  // [PUT] stored/timelines/:_id
+  putEditTimeline(req, res, next) {
     const formData = req.body
     formData.time = new Date(formData.date + ' ' + formData.time)
     delete formData.date
@@ -124,8 +201,8 @@ class StoredController {
       .then(() => res.redirect('/stored/timelines'))
       .catch(next)
   }
-
-  deleteTimeline(req, res) {
+  // [DELETE] stored/timelines/:_id
+  postDeleteTimeline(req, res) {
     const timelineId = req.params._id
     console.log(timelineId)
     Timeline.deleteOne({ _id: timelineId }).then(() =>

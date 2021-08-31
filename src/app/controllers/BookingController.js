@@ -1,13 +1,21 @@
 const Timeline = require('../models/timeline')
 const Bill = require('../models/bill')
+const openSocket = require('socket.io-client')
 const { multiMongooseToObject, getTheaterName } = require('../util/mongoose')
-const timeline = require('../models/timeline')
 class BookingController {
-  index(req, res, next) {
-    res.render('booking/bookingDetail', { id: req.params._id })
+  // [GET] booking/:_id/detail'
+  getBookingDetail(req, res, next) {
+    openSocket('http://localhost:3000')
+    res.render('booking/bookingDetail', {
+      id: req.params._id,
+      pageTitle: 'Show Booking Detail',
+      path: '/booking/:_id/detail',
+      // editing: editMode,
+      isAuthenticated: req.session.isLoggedIn,
+    })
   }
   // [GET] booking/:_id
-  showTimeline(req, res) {
+  getTimeline(req, res, next) {
     const now = new Date()
     var today = new Date(
       now.getFullYear(),
@@ -24,20 +32,21 @@ class BookingController {
       else nextDay.setHours(7, 0, 0, 0)
       weekList.push(nextDay)
     }
-    Timeline.find(
-      {
-        movie_id: req.params._id,
-        time: { $gte: today, $lte: weekList[weekList.length - 1] },
-      },
-      function (err, timelines) {
-        // add timeline according each days
+    // find timeline in a weeek
+    Timeline.find({
+      movie_id: req.params._id,
+      time: { $gte: today, $lte: weekList[weekList.length - 1] },
+    })
+      .then((timelines) => {
+        // add timeline in week to list
         var timelineList = multiMongooseToObject(timelines)
         const timelineInWeek = new Array(7)
+
         timelineList.forEach((timeline) => {
           timeline.theater_id = timeline.theater_id.toString()
           const dayIndex = timeline.time.getDate() - weekList[0].getDate()
-          if (timelineInWeek[dayIndex]) timelineInWeek[dayIndex].push(timeline)
-          else timelineInWeek[dayIndex] = [timeline]
+          if (!timelineInWeek[dayIndex]) timelineInWeek[dayIndex] = [timeline]
+          else timelineInWeek[dayIndex].push(timeline)
         })
 
         const result = []
@@ -72,30 +81,67 @@ class BookingController {
         })
         res.render('booking/timelineList', {
           timelines: result,
+          pageTitle: 'Show Timeline List',
+          path: '/booking/:id',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
         })
-      },
-    )
+      })
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
-  // [GET] booking/:_id/detail
 
   //  [POST] booking/payment
-  showPayment(req, res, next) {
+  getPayment(req, res, next) {
     const formData = req.body
+    console.log(formData)
     formData.user_id = req.signedCookies.user_id
     formData.seat_name = formData.seat_name.trim()
     formData.time_created = new Date().toLocaleDateString()
-    console.log(formData)
-    res.render('booking/payment', { infor: formData })
+
+    // const bill = new Bill(formData)
+    // io.getIO().emit('booked', { seat: formData.seat_name })
+
+    // const session = stripe.checkout.sessions.create({
+    //   payment_method_types: ['card'],
+    //   mode: 'setup',
+    //   success_url: 'http://localhost:3000/booking/success',
+    //   cancel_url: 'http://localhost:3000/booking/cancel',
+    // })
+
+    res.render('booking/payment', {
+      infor: formData,
+      // sessionId: session.id,
+      pageTitle: 'Show Payment',
+      path: '/booking/payment',
+      // editing: editMode,
+      isAuthenticated: req.session.isLoggedIn,
+    })
   }
 
   // [POST] booking/payment/confirm
-  storePayment(req, res, next) {
+  postPayment(req, res, next) {
     const formData = req.body
     formData.time_created = new Date()
     const bill = new Bill(formData)
-    bill.save()
-    res.redirect('/')
+    bill
+      .save()
+      .then(() => res.redirect('/'))
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
+  //   showSuccess(req, res) {
+  //     res.send('Success')
+  //   }
+  //   showCancel(req, res) {
+  //     res.send('Cancel')
+  //   }
 }
 
 module.exports = new BookingController()
