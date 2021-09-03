@@ -4,7 +4,7 @@
             <a href="/customer/account" class="btn btn-success mt-4">
                 Thông tin chung
             </a>
-            <a href="/customer/bill" class="btn btn-outline-success mt-4">
+            <a href="/customer/orders" class="btn btn-outline-success mt-4">
                 Hoá đơn
             </a>
 
@@ -21,7 +21,7 @@
                         <input readonly class="form-control input" id="user_name" name="user_name" type="text"
                             value="{{user.user_name}}">
                     </div>
-                    <div class=" form-field">
+                    <div class=" form-field hidden">
                         <label class="label">Mật khẩu</label>
                         <input readonly class="form-control input" id="password" name="password" type="password"
                             value={{user.password}}>
@@ -44,21 +44,30 @@
                         <input readonly class="form-control input" id="address" name="address" type="text"
                             value="{{user.address}}">
                     </div>
-                    <button type="button" id="btnAva" class="btn btn-outline-success" onclick="">Cập nhật ảnh đại
-                        diện</button>
                     <button type="button" id="btnEdit" class="btn btn-outline-success" onclick="clickFunc(this)">Thay
                         đổi thông tin</button>
                     <a>
                         <button type="submit" id="btnUpdate" class="btn btn-outline-success hidden">Cập
                             nhật</button>
                     </a>
-                    {{else}}
-                    <h2>ERROR!!!</h2>
-
                 </div>
-
             </form>
+        </div>
+        <div class="mt-4">
+            <form method="POST" action="/customer/avatar/{{user._id}}/update" enctype="multipart/form-data">
+                <div class="form-field">
+                    <label class="label" for="exampleFormControlFile1">Cập nhật ảnh đại diện</label>
+                    <input class="" type="file" class="form-control-file" id="exampleFormControlFile1" name="avatar">
+                </div>
+                <a>
+                    <button type="submit" class="btn btn-outline-success mt-4">Cập
+                        nhật ava</button>
+                </a>
+            </form>
+            {{else}}
+            <h2>ERROR!!!</h2>
             {{/if}}
+
         </div>
 
     </div>

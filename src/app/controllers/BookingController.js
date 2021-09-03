@@ -1,5 +1,5 @@
 const Timeline = require('../models/timeline')
-const Bill = require('../models/bill')
+const Order = require('../models/order')
 const openSocket = require('socket.io-client')
 const { multiMongooseToObject, getTheaterName } = require('../util/mongoose')
 class BookingController {
@@ -98,11 +98,11 @@ class BookingController {
   getPayment(req, res, next) {
     const formData = req.body
     console.log(formData)
-    formData.user_id = req.signedCookies.user_id
+    formData.user_id = req.session.user._id
     formData.seat_name = formData.seat_name.trim()
     formData.time_created = new Date().toLocaleDateString()
 
-    // const bill = new Bill(formData)
+    // const bill = new Order(formData)
     // io.getIO().emit('booked', { seat: formData.seat_name })
 
     // const session = stripe.checkout.sessions.create({
@@ -126,7 +126,7 @@ class BookingController {
   postPayment(req, res, next) {
     const formData = req.body
     formData.time_created = new Date()
-    const bill = new Bill(formData)
+    const bill = new Order(formData)
     bill
       .save()
       .then(() => res.redirect('/'))

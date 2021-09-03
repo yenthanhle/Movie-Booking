@@ -36,7 +36,6 @@ app.use(
     extended: true,
   }),
 )
-
 app.engine('.hbs', exphbs({ extname: '.hbs' }))
 app.set('views', path.join(__dirname, 'resources/views'))
 app.set('view engine', '.hbs')

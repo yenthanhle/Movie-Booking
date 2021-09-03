@@ -16,6 +16,7 @@ const schema = new Schema(
     date_of_birth: String,
     phone_number: String,
     address: String,
+    avatar: String,
     verifyToken: String,
     isActive: Boolean,
     subDocument: {

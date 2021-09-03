@@ -4,14 +4,32 @@
             <a href="/customer/account" class="btn btn-outline-success mt-4">
                 Thông tin chung
             </a>
-            <a href="/customer/bill" class="btn btn-success mt-4">
+            <a href="/customer/orders" class="btn btn-success mt-4">
                 Hóa đơn
             </a>
-
         </div>
     </div>
     <div class="right">
-        <h2>Thông tin hoá đơn</h2>
+
+        {{#if orders}}
+        {{#each orders}}
+        <div>
+            <label>{{this._id}}</label>
+            <a href="/customer/orders/{{this._id}}">Hoá đơn</a>
+        </div>
+        {{/each}}
+        {{/if}}
+        {{!-- <form method="POST" action="/customer/avatar/{{user._id}}/update" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Cập nhật ảnh đại diện</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="avatar">
+            </div>
+            <a>
+                <button type="submit" id="btnUpdateAva" class="btn btn-outline-success">Cập
+                    nhật ava</button>
+            </a>
+        </form> --}}
+        {{!-- <h2>Thông tin hoá đơn</h2>
         <div class="customer-infor">
             {{#if user}}
             <div class=" input-group input-group-sm mb-3 ">
@@ -25,7 +43,7 @@
                     <label class="label">Ngày tạo</label>
                     <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
                         value={{bill.time_created}}>
-                </div>
+                </div> --}}
                 {{!-- <div class="form-field">
                     <label class="label">Tên phim</label>
                     <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
@@ -46,7 +64,7 @@
                     <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
                         value={{bill.date_of_birth}}>
                 </div> --}}
-                <div class="form-field">
+                {{!-- <div class="form-field">
                     <label class="label">Tên ghế</label>
                     <input readonly class="form-control input" id="address" name="address" type="text"
                         value="{{bill.seat_name}}">
@@ -55,6 +73,6 @@
                 <h2>ERROR!!!</h2>
             </div>
             {{/if}}
-        </div>
+        </div> --}}
     </div>
 </div>

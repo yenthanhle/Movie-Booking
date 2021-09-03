@@ -38,7 +38,7 @@ function showUserName(req, res, next) {
       if (!user) return
       // save user to load user name
       else {
-        res.locals.user = mongooseToObject(user)
+        res.locals.userInfor = mongooseToObject(user)
         next()
       }
     })

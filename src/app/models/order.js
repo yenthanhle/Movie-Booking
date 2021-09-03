@@ -26,8 +26,8 @@ const schema = new Schema(
   },
   {
     timestamps: true,
-    collection: 'bill',
+    collection: 'order',
   },
 )
 schema.plugin(timeZone, { paths: ['date', 'subDocument.subDate'] })
-module.exports = mongoose.model('Bill', schema)
+module.exports = mongoose.model('Order', schema)
