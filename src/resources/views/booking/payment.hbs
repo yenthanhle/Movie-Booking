@@ -1,32 +1,69 @@
 <div class="container">
-    <form class="film-input" method="POST" action="/booking/payment/confirm">
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Mã user</label>
-            <input type="text" class="form-control" name="user_id" readonly value={{infor.user_id}}>
-        </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Mã lịch chiếu</label>
-            <input type="text" class="form-control" name="timeline_id" readonly value={{infor.timeline_id}}>
-        </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Ngày thanh toán</label>
-            <input type="text" class="form-control" readonly value={{infor.time_created}}>
-        </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Số vé</label>
-            <input type="text" class="form-control" name="seat_count" readonly value={{infor.seat_count}}>
-        </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Ghế</label>
-            <input type="text" class="form-control" name="seat_name" readonly value="{{infor.seat_name}}">
-        </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Tổng tiền</label>
-            <input type="text" class="form-control" name="payment" readonly value={{infor.payment}}>
-        </div>
-        <div class="form-field mt-4 ml-0">
-            <button type="submit" class="btn btn-success">Thanh toán</button>
+    <form style="width:70%; margin: 0 auto;" method="POST" action="/booking/payment/confirm">
 
+        <div class="form-group row mt-4 hidden">
+            <label style="width: 35%;" class="col-form-label">Mã user</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" name="user_id" readonly value={{infor.user_id}}>
+            </div>
+        </div>
+        <div class="form-group row mt-4 hidden">
+            <label style="width: 35%;" class="col-form-label">Mã lịch chiếu</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" name="timeline_id" readonly value={{infor.timeline_id}}>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Tên phim</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" readonly value="{{infor.movie_name}}">
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Tên rạp</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" readonly value="{{infor.theater_name}}">
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Ngày chiếu</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" readonly value={{infor.date}}>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Giờ chiếu</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" readonly value={{infor.time}}>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Ngày thanh toán</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" readonly value={{infor.time_created}}>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Số vé</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" name="seat_count" readonly value={{infor.seat_count}}>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Ghế</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" name="seat_name" readonly value="{{infor.seat_name}}">
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label style="width: 35%;" class="col-form-label">Tổng tiền</label>
+            <div style="width: 65%;">
+                <input type="text" class="form-control" name="payment" readonly value={{infor.payment}}>
+
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <button type="submit" class="btn btn-success">Thanh toán</button>
         </div>
     </form>
 </div>

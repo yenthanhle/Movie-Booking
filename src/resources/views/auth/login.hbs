@@ -1,39 +1,48 @@
-<div class="container mt-4">
+<div class="container mt-4 ">
     {{#if error}}
     <div class="alert alert-danger" role="alert">
         {{error}}
     </div>
     {{/if}}
-    <form method="POST" action="/auth/login" id="form-login" class="form-inline">
-        <div class="form-group col-md-10 mt-4 form-row">
-            <label for="user_name" class="col-sm-2 col-form-label">User name</label>
-            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="User name or email"
-                required value="{{oldInput.user_name}}">
-            <div class="invalid-feedback form-message"></div>
+    <form style="width:50%;margin: 0 auto;border-style:solid;  border-color: rgb(9, 9, 63);padding:20px;" method="POST"
+        action="/auth/login" id="form-login">
+        <div class="mt-4 form-group row">
+            <h2 style="width:auto;margin: 0 auto">Đăng nhập</h2>
+        </div>
+        <div class="mt-4 form-group row">
+            <label for="user_name" class="col-sm-3 col-form-label">User name</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="user_name" name="user_name" placeholder="User name" required
+                    value="{{oldInput.user_name}}">
+                <div class="invalid-feedback form-message"></div>
+            </div>
         </div>
 
-        <div class="col-md-10 mt-4 form-row">
-            <label for="password" class="col-sm-2 col-form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required
-                value={{oldInput.password}}>
-            <i style="position: absolute; margin-left: 300px;  height: 80%; opacity: 0.8"
-                class="fa fa-fw fa-eye-slash field-icon" onclick="passwordClickShowFunction(this)"></i>
-            <div class="invalid-feedback  ml-4 form-message"> </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+                <i style="position: absolute; margin-left: 340px; margin-top: 10px;height: auto; opacity: 0.8"
+                    class="fa fa-fw fa-eye-slash field-icon" onclick="passwordClickShowFunction(this)"></i>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                    required value={{oldInput.password}}>
+                <div class="invalid-feedback form-message"></div>
+            </div>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <a href="/auth/signup">Create account</a>
+        <div class="form-row mt-4">
+            <button style="margin: 0 auto;" type="submit" class="btn btn-primary">Log in</button>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <button type="submit" class="btn btn-primary">Log in</button>
+        <div class="form-row mt-4">
+            <a style="margin: 0 auto;" href="/auth/reset">Forget password</a>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <a href="/auth/reset">Forget password</a>
+        <div class="dropdown-divider mt-5"></div>
+        <div class="form-group row mt-5">
+            <a class="btn btn-success btn-md active" style="margin: 0 auto;" href="/auth/signup">Create account</a>
         </div>
     </form>
 </div>
 
 
-<script src="/validators/loginValidator.js"></script>
+<script src="/validators/inputValidator.js"></script>
 <script>
     Validator({
         form: '#form-login',

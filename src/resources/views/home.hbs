@@ -29,26 +29,28 @@
             <p></p>
             <a href="/comming-soon" type="button" class="btn btn-success">Phim sắp chiếu</a>
         </div>
-        <div class="row">
+        <div class="row mt-3">
             {{#each movies}}
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-sm-4 mt-4">
                 <div class="card card-movie-item">
                     <a href='/movie/{{this.slug}}'>
                         <img class="card-img-top" src={{this.poster}} alt="Card image cap">
                     </a>
-                    <div class="card-body">
-                        <a href='/movie'>
-                            <h5 class="card-title"></h5>
-                        </a>
-                        <p class="card-text">{{this.name}}</p>
-                        <p class="card-text">{{this.release_date}}</p>
+                    <div class="card-body" style="text-align: center;">
+                        <div class="card-content">
+                            <a href='/movie/{{this.slug}}'>
+                                <h5 class="card-title">{{this.name}}</h5>
+                            </a>
+                            <p class="card-text mt-2">Khởi chiếu {{this.release_date}}</p>
+                        </div>
 
+                        <div class="card-button">
+                            <a href="/booking/{{this._id}}" type="button" class="btn btn-success">Đặt vé</a>
+                        </div>
                     </div>
                 </div>
             </div>
             {{/each}}
         </div>
     </div>
-
-
 </div>

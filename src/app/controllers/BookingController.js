@@ -1,17 +1,26 @@
 const Timeline = require('../models/timeline')
 const Order = require('../models/order')
 const openSocket = require('socket.io-client')
-const { multiMongooseToObject, getTheaterName } = require('../util/mongoose')
+const {
+  multiMongooseToObject,
+  getTheaterName,
+  getTimelineInfor,
+} = require('../util/mongoose')
 class BookingController {
   // [GET] booking/:_id/detail'
   getBookingDetail(req, res, next) {
-    openSocket('http://localhost:3000')
-    res.render('booking/bookingDetail', {
-      id: req.params._id,
-      pageTitle: 'Show Booking Detail',
-      path: '/booking/:_id/detail',
-      // editing: editMode,
-      isAuthenticated: req.session.isLoggedIn,
+    // openSocket('http://localhost:3000')
+    const timelineId = req.params._id
+    Timeline.findById(timelineId).then((timeline) => {
+      getTimelineInfor(timeline, (timelineInfor) => {
+        res.render('booking/bookingDetail', {
+          infor: timelineInfor,
+          pageTitle: 'Show Booking Detail',
+          path: '/booking/:_id/detail',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
+        })
+      })
     })
   }
   // [GET] booking/:_id
@@ -32,7 +41,7 @@ class BookingController {
       else nextDay.setHours(7, 0, 0, 0)
       weekList.push(nextDay)
     }
-    // find timeline in a weeek
+    // find timeline in a week
     Timeline.find({
       movie_id: req.params._id,
       time: { $gte: today, $lte: weekList[weekList.length - 1] },
@@ -62,8 +71,8 @@ class BookingController {
               listTimeline: [],
             })
             // set theater name
-            getTheaterName(theater_id[i], (tname) => {
-              timelineInEachTheater[i].theater_name = tname.name
+            getTheaterName(theater_id[i], (name) => {
+              timelineInEachTheater[i].theater_name = name.name
             })
           }
           // add id of timeline of every theater
@@ -94,31 +103,29 @@ class BookingController {
       })
   }
 
-  //  [POST] booking/payment
+  //  [GET] booking/payment
   getPayment(req, res, next) {
     const formData = req.body
-    console.log(formData)
-    formData.user_id = req.session.user._id
-    formData.seat_name = formData.seat_name.trim()
-    formData.time_created = new Date().toLocaleDateString()
-
-    // const bill = new Order(formData)
-    // io.getIO().emit('booked', { seat: formData.seat_name })
-
-    // const session = stripe.checkout.sessions.create({
-    //   payment_method_types: ['card'],
-    //   mode: 'setup',
-    //   success_url: 'http://localhost:3000/booking/success',
-    //   cancel_url: 'http://localhost:3000/booking/cancel',
-    // })
-
-    res.render('booking/payment', {
-      infor: formData,
-      // sessionId: session.id,
-      pageTitle: 'Show Payment',
-      path: '/booking/payment',
-      // editing: editMode,
-      isAuthenticated: req.session.isLoggedIn,
+    // console.log(formData)
+    const timelineId = req.body.timeline_id
+    Timeline.findById(timelineId).then((timeline) => {
+      getTimelineInfor(timeline, (timelineInfor) => {
+        formData.movie_name = timelineInfor.movie_name
+        formData.theater_name = timelineInfor.theater_name
+        formData.date = timelineInfor.date
+        formData.time = timelineInfor.time
+        formData.user_id = req.session.user._id
+        formData.seat_name = formData.seat_name.trim()
+        formData.time_created = new Date().toLocaleDateString()
+        res.render('booking/payment', {
+          infor: formData,
+          // sessionId: session.id,
+          pageTitle: 'Show Payment',
+          path: '/booking/payment',
+          // editing: editMode,
+          isAuthenticated: req.session.isLoggedIn,
+        })
+      })
     })
   }
 

@@ -1,51 +1,72 @@
 <div class="container">
-    <form id="form-create-timeline" class="form-inline" method="POST" action="/stored/timelines/create">
-        <div class="form-group col-md-10 mt-4 form-row">
-            <label for="user_name" class="label">Chọn rạp</label>
-            <select name='theater_id' class="form-control" id="theater">
-                {{#each results.theaterList}}
-                <option value={{this._id}}>{{this.name}}</option>
-                {{/each}}
-            </select>
+    <h2>Tạo lịch chiếu</h2>
+
+    <form style="width: 50%; margin: auto;" class="mt-4" id="form-create-timeline" method="POST"
+        action="/stored/timelines/create">
+        <div class="form-group row flex">
+            <label for="first_name" style="width: 35%;" class="col-form-label">Chọn rạp
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div style="width: 65%;">
+                <select name='theater_id' class="form-control" id="theater">
+                    {{#each results.theaterList}}
+                    <option value={{this._id}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <label for="user_name" class="label">Chọn phim</label>
-            <select name="movie_id" class="form-control">
-                {{#each results.movieList}}
-                <option value={{this._id}} name="movie_id">{{this.name}}</option>
-                {{/each}}
-            </select>
+
+        <div class="form-group row mt-4 flex">
+            <label for="first_name" style="width: 35%;" class="col-form-label">Chọn phim
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div style="width: 65%;">
+                <select name="movie_id" class="form-control">
+                    {{#each results.movieList}}
+                    <option value={{this._id}} name="movie_id">{{this.name}}</option>
+                    {{/each}}
+                </select>
+                <div class="invalid-feedback form-message"></div>
+            </div>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <div class="form-field form-group col-5">
-                <label class="label">Ngày chiếu</label>
+
+        <div class="form-group row mt-4 flex">
+            <label for="first_name" style="width: 35%;" class="col-form-label">Ngày chiếu
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div style="width: 65%;">
                 <input id="date" type="date" class="form-control" name="date" required>
                 <div class="invalid-feedback form-message"></div>
-
             </div>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <div class="form-field col-5">
-                <label class="label">Giờ chiếu</label>
+
+        <div class="form-group row mt-4 flex">
+            <label for="first_name" style="width: 35%;" class="col-form-label">Giờ chiếu
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div style="width: 65%;">
                 <input id="time" type="time" class="form-control" name="time" required>
                 <div class="invalid-feedback form-message"></div>
-
             </div>
         </div>
 
-        <div class="form-group col-md-10 mt-4 form-row">
-            <div class="form-field col-5">
-                <label class="label">Phòng</label>
+        <div class="form-group row mt-4 flex">
+            <label for="first_name" style="width: 35%;" class="col-form-label">Phòng
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div style="width: 65%;">
                 <input id="room" type="number" class="form-control" name="room" required>
                 <div class="invalid-feedback form-message"></div>
             </div>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <button type="submit" class="btn btn-success">Tạo lịch chiếu</button>
+
+        <div class="form-group row mt-4 flex">
+            <button type="submit" style="margin: auto" class="btn btn-success">Tạo lịch chiếu</button>
         </div>
     </form>
 </div>
-<script src="/validators/loginValidator.js"></script>
+
+<script src="/validators/inputValidator.js"></script>
 <script>
     Validator({
         form: '#form-create-timeline',

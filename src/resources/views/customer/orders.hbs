@@ -10,69 +10,25 @@
         </div>
     </div>
     <div class="right">
-
         {{#if orders}}
         {{#each orders}}
-        <div>
-            <label>{{this._id}}</label>
-            <a href="/customer/orders/{{this._id}}">Hoá đơn</a>
+        <h2>Thông tin hoá đơn</h2>
+        <div class="list-group mt-4" style="width: 50%; margin: auto">
+            <a href="/customer/orders/{{this._id}}"
+                class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{this.timelineInfor.movie_name}}</h5>
+                    <small>{{this.timelineInfor.date}} - {{this.timelineInfor.time}}</small>
+                </div>
+                <p class="mb-1">{{this.timelineInfor.theater_name}}</p>
+                <small>{{this.seat_name}}</small>
+                <br>
+                <small>{{this.payment}}</small>
+            </a>
         </div>
         {{/each}}
+        {{else}}
+        <h2>ERROR!!!</h2>
         {{/if}}
-        {{!-- <form method="POST" action="/customer/avatar/{{user._id}}/update" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="exampleFormControlFile1">Cập nhật ảnh đại diện</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="avatar">
-            </div>
-            <a>
-                <button type="submit" id="btnUpdateAva" class="btn btn-outline-success">Cập
-                    nhật ava</button>
-            </a>
-        </form> --}}
-        {{!-- <h2>Thông tin hoá đơn</h2>
-        <div class="customer-infor">
-            {{#if user}}
-            <div class=" input-group input-group-sm mb-3 ">
-
-                <div class=" form-field">
-                    <label class="label">Mã hoá đơn</label>
-                    <input readonly class="form-control input" id="text" value={{bill._id}}>
-                </div>
-
-                <div class="form-field">
-                    <label class="label">Ngày tạo</label>
-                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
-                        value={{bill.time_created}}>
-                </div> --}}
-                {{!-- <div class="form-field">
-                    <label class="label">Tên phim</label>
-                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
-                        value={{bill.date_of_birth}}>
-                </div>
-                <div class="form-field">
-                    <label class="label">Ngày chiếu</label>
-                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
-                        value={{bill.date_of_birth}}>
-                </div>
-                <div class="form-field">
-                    <label class="label">Tên rạp</label>
-                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
-                        value={{bill.date_of_birth}}>
-                </div>
-                <div class="form-field">
-                    <label class="label">Phòng</label>
-                    <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
-                        value={{bill.date_of_birth}}>
-                </div> --}}
-                {{!-- <div class="form-field">
-                    <label class="label">Tên ghế</label>
-                    <input readonly class="form-control input" id="address" name="address" type="text"
-                        value="{{bill.seat_name}}">
-                </div>
-                {{else}}
-                <h2>ERROR!!!</h2>
-            </div>
-            {{/if}}
-        </div> --}}
     </div>
 </div>

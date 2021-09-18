@@ -49,14 +49,14 @@ class AuthController {
           if (!isMatch)
             return res.render('auth/login', {
               oldInput: req.body,
-              error: 'Password is incorrect!!!',
+              error: 'User name or password is incorrect!!!',
               validationErrors: [],
             })
           req.session.user = user
           req.session.isLoggedIn = true
-          req.session.cookie.maxAge = 3600000
+          req.session.cookie.maxAge = 7200000
           req.session.save((err) => {
-            console.log(err)
+            // console.log(err)
             res.redirect('/')
           })
         })

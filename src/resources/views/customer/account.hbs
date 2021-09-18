@@ -7,69 +7,80 @@
             <a href="/customer/orders" class="btn btn-outline-success mt-4">
                 Hoá đơn
             </a>
-
         </div>
     </div>
     <div class="right">
+        {{#if user}}
         <h2>Thông tin chung</h2>
-        <div class="customer-infor">
-            {{#if user}}
-            <form method="POST" action="/customer/account/{{user._id}}/edit?_method=PUT">
-                <div class=" input-group input-group-sm mb-3 ">
-                    <div class=" form-field">
-                        <label class="label">User name</label>
-                        <input readonly class="form-control input" id="user_name" name="user_name" type="text"
-                            value="{{user.user_name}}">
-                    </div>
-                    <div class=" form-field hidden">
-                        <label class="label">Mật khẩu</label>
-                        <input readonly class="form-control input" id="password" name="password" type="password"
-                            value={{user.password}}>
-                        <i style="position: absolute; margin-left: 800px;  height: 80%;  opacity: 0.8"
-                            class="fa fa-fw fa-eye-slash field-icon mt-3" onclick="passwordClickShowFunction(this)"></i>
-                    </div>
-
-                    <div class="form-field">
-                        <label class="label">Ngày sinh</label>
-                        <input readonly class="form-control input" id="date_of_birth" name="date_of_birth" type="date"
-                            value={{user.date_of_birth}}>
-                    </div>
-                    <div class="form-field">
-                        <label class="label">Số điện thoại</label>
-                        <input readonly class="form-control input" id="phone_number" name="phone_number" type="text"
-                            value={{user.phone_number}}>
-                    </div>
-                    <div class="form-field">
-                        <label class="label">Thành phố / Tỉnh</label>
-                        <input readonly class="form-control input" id="address" name="address" type="text"
-                            value="{{user.address}}">
-                    </div>
-                    <button type="button" id="btnEdit" class="btn btn-outline-success" onclick="clickFunc(this)">Thay
-                        đổi thông tin</button>
-                    <a>
-                        <button type="submit" id="btnUpdate" class="btn btn-outline-success hidden">Cập
-                            nhật</button>
-                    </a>
+        <form style="width=100%;" method="POST" action="/customer/account/{{user._id}}/edit?_method=PUT">
+            <div class="form-group row flex mt-4">
+                <label for="user_name" style="width: 35%;" class="col-form-label" class="label">User
+                    name</label>
+                <div style="width: 65%;">
+                    <input readonly style="width: 70%; text-align: center;" class="form-control" id="user_name"
+                        name="user_name" type="text" value="{{user.user_name}}">
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="form-group row flex hidden">
+                <label for="password" style="width: 35%;" class="col-form-label" class="label">Mật khẩu</label>
+                <div style="width: 65%;">
+                    <input readonly style="width: 70%; text-align: center;" class="form-control" id="password"
+                        type="password" value={{user.password}}>
+                    <i style="position: absolute; margin-left: 800px;  height: 80%;  opacity: 0.8"
+                        class="fa fa-fw fa-eye-slash field-icon mt-3" onclick="passwordClickShowFunction(this)"></i>
+                </div>
+            </div>
+
+            <div class="form-group row flex mt-4">
+                <label for="date_of_birth" style="width: 35%;" class="col-form-label" class="label">Ngày
+                    sinh</label>
+                <div style="width: 65%;">
+                    <input readonly style="width: 70%; text-align: center;" class="form-control" id="date_of_birth"
+                        name="date_of_birth" type="date" value={{user.date_of_birth}}>
+                </div>
+            </div>
+
+            <div class="form-group row flex mt-4">
+                <label for="user_name" style="width: 35%;" class="col-form-label" class="label">Số điện
+                    thoại</label>
+                <div style="width: 65%;">
+                    <input readonly style="width: 70%; text-align: center;" class="form-control" id="phone_number"
+                        name="phone_number" type="text" value={{user.phone_number}}>
+                </div>
+            </div>
+
+            <div class="form-group row flex mt-4">
+                <label for="user_name" style="width: 35%;" class="col-form-label" class="label">Thành phố /
+                    Tỉnh</label>
+                <div style="width: 65%;">
+                    <input readonly style="width: 70%; text-align: center;" class="form-control" id="address"
+                        name="address" type="text" value="{{user.address}}">
+                </div>
+            </div>
+            <button style="margin: auto;" type="submit" id="btnUpdate" class="btn btn-outline-success hidden">Cập
+                nhật</button>
+            <div class="form-group row flex mt-4">
+                <button style="margin: auto;" type="button" id="btnEdit" class="btn btn-outline-success"
+                    onclick="clickFunc(this)">Thay đổi thông tin</button>
+
+            </div>
+        </form>
+        <div class="dropdown-divider"></div>
+
         <div class="mt-4">
             <form method="POST" action="/customer/avatar/{{user._id}}/update" enctype="multipart/form-data">
-                <div class="form-field">
-                    <label class="label" for="exampleFormControlFile1">Cập nhật ảnh đại diện</label>
-                    <input class="" type="file" class="form-control-file" id="exampleFormControlFile1" name="avatar">
-                </div>
-                <a>
-                    <button type="submit" class="btn btn-outline-success mt-4">Cập
-                        nhật ava</button>
-                </a>
+                {{!-- <div class="form-field"> --}}
+                    {{!-- <label class="label" for="exampleFormControlFile1">Cập nhật ảnh đại diện</label> --}}
+                    <br>
+                    <input style="margin:auto;" class="" type="file" class="form-control-file"
+                        id="exampleFormControlFile1" name="avatar">
+                    <br>
+                    <button type="submit" class="btn btn-outline-success mt-4">Cập nhật ảnh đại diện</button>
             </form>
-            {{else}}
-            <h2>ERROR!!!</h2>
-            {{/if}}
-
         </div>
-
+        {{else}}
+        <h2>ERROR!!!</h2>
+        {{/if}}
     </div>
 </div>
 
@@ -90,7 +101,6 @@
         btnUpdate.classList.toggle('hidden')
     }
     function passwordClickShowFunction(e) {
-
         const password = document.querySelector('#password')
         if (password.type == 'password')
             password.type = 'text'

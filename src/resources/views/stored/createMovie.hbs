@@ -1,71 +1,153 @@
 <div class="container">
-    <form class="film-input" method="POST" action="/stored/movies/createMovie">
-        <div class="row mt-4">
-            <div class="form-field form-group col-5">
-                <label class="label">Tên phim</label>
-                <input type="text" class="form-control" name="name">
+    <h2>Tạo phim</h2>
+    <form class="film-input" id="form-create-movie" method="POST" action="/stored/movies/create">
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="name" style="width: 35%;" class="col-form-label">Tên phim
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="name" placeholder="" name="name">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field form-group col-5">
-                <label class="label">Thể loại</label>
-                <input type="text" class="form-control" name="genre">
+            <div class="form-group col-sm-6 flex">
+                <label for="genre" style="width: 35%;" class="col-form-label">Thể loại
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="genre" placeholder="" name="genre">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="duration" style="width: 35%;" class="col-form-label">Thời lượng
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="duration" placeholder=""
+                        name="duration">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 flex">
+                <label for="release_date" style="width: 35%;" class="col-form-label">Ngày khởi chiếu
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="date" style="width: 100%;" class="form-control" id="release_date" name="release_date">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="form-field form-group col-5">
-                <label class="label">Thời lượng</label>
-                <input type="text" class="form-control" name="duration">
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="director" style="width: 35%;" class="col-form-label">Đạo diễn
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="director" placeholder=""
+                        name="director">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field col-5">
-                <label class="label">Ngày khởi chiếu</label>
-                <input type="date" class="form-control" name="release_date">
+            <div class="form-group col-sm-6 flex">
+                <label for="actor" style="width: 35%;" class="col-form-label">Diễn viên
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="actor" placeholder="" name="actor">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="first_name" style="width: 35%;" class="col-form-label">Mô tả
+                    <span style="color:red;"> *</span>
+                </label>
+                <div style="width: 65%;">
+                    <textarea type="text" style="width: 100%;" class="form-control" id="description"
+                        name="description"></textarea>
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 flex">
+                <label for="first_name" style="width: 35%;" class="col-form-label">Quốc gia
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="country" placeholder=""
+                        name="country">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Đạo diễn</label>
-                <input type="text" class="form-control" name="director">
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="poster" style="width: 35%;" class="col-form-label">Poster
+                    <sp style="color:red;"> *
+                </label>
+                <div style="width: 65%;">
+                    <textarea type="text" style="width: 100%;" class="form-control" id="poster"
+                        name="poster"></textarea>
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field col-5">
-                <label class="label">Diễn viên</label>
-                <input type="text" class="form-control" name="actor">
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Mô tả</label>
-                <textarea type="text" class="form-control" name="description"></textarea>
-            </div>
-            <div class="form-field col-5">
-                <label class="label">Quốc gia</label>
-                <input type="text" class="form-control" name="country">
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Đánh giá</label>
-                <input type="text" class="form-control" name="rating">
-            </div>
-            <div class="form-field col-5">
-                <label class="label">Số lượt bán</label>
-                <input type="text" class="form-control" name="sold_ticket">
+            <div class="form-group col-sm-6 flex">
+                <label for="trailer" style="width: 35%;" class="col-form-label">Link trailer
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="trailer" name="trailer">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
-
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Poster</label>
-                <textarea type="text" class="form-control" name="poster"></textarea>
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="rating" style="width: 35%;" class="col-form-label">Đánh giá</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="rating" placeholder=""
+                        name="rating">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field col-5">
-                <label class="label">Link trailer</label>
-                <input type="text" class="form-control" name="trailer">
+            <div class="form-group col-sm-6 flex">
+                <label for="" style="width: 35%;" class="col-form-label">Số lượt bán</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="" placeholder=""
+                        name="sold_ticket">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-success">Tạo phim</button>
+        <div class="form-group row mt-3">
+            <button type="submit" class="btn btn-success" style="margin: auto">Tạo phim</button>
+        </div>
     </form>
 </div>
+
+<script src="/validators/inputValidator.js"></script>
+<script>
+    Validator({
+        form: '#form-create-movie',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#name', 'Nhập tên phim'),
+            Validator.isRequired('#genre', 'Nhập thể loại phim'),
+            Validator.isRequired('#duration', 'Nhập thời lượng phim'),
+            Validator.isRequired('#release_date', 'Chọn ngày khỏi chiếu'),
+            Validator.isRequired('#director', 'Nhập tên đạo diễn'),
+            Validator.isRequired('#actor', 'Nhập tên diễn viên'),
+            Validator.isRequired('#description', 'Nhập mô tả'),
+            Validator.isRequired('#country', 'Nhập quốc gia '),
+            Validator.isRequired('#poster', 'Nhập link poster'),
+            Validator.isRequired('#trailer', 'Nhập link trailer'),
+        ]
+    })
+</script>

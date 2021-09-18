@@ -10,6 +10,14 @@ const {
 } = require('../util/mongoose')
 
 class StoredController {
+  index(req, res) {
+    res.render('stored/mode', {
+      pageTitle: 'Manage Mode',
+      path: '/stored',
+      // editing: editMode,
+      isAuthenticated: req.session.isLoggedIn,
+    })
+  }
   // [GET] stored/movies
   getMovies(req, res) {
     Movie.find({})
@@ -38,7 +46,7 @@ class StoredController {
     })
   }
   // [POST] stored/movies/create
-  postCreateMovie(req, res) {
+  postCreateMovie(req, res, next) {
     const formData = req.body
     const movie = new Movie(formData)
     movie
@@ -54,7 +62,6 @@ class StoredController {
   getEditMovie(req, res, next) {
     Movie.findById(req.params._id)
       .then((movie) => {
-        console.log(movie)
         res.render('stored/editMovie', {
           movie: mongooseToObject(movie),
           pageTitle: 'Edit Movie',
@@ -91,7 +98,7 @@ class StoredController {
       })
   }
   // [GET] stored/timelines
-  getTimelines(req, res) {
+  getTimelines(req, res, next) {
     const searchFunc = function search(input, callback) {
       // find movie and theater name
       async.parallel(
@@ -143,7 +150,7 @@ class StoredController {
       })
   }
   // [GET] stored/timelines/create
-  getCreateTimeline(req, res) {
+  getCreateTimeline(req, res, next) {
     async.parallel(
       {
         movieList: function (callback) {
@@ -167,13 +174,21 @@ class StoredController {
     )
   }
   // [POST] stored/timelines/create
-  postCreateTimeline(req, res) {
+  postCreateTimeline(req, res, next) {
     const formData = req.body
     formData.time = new Date(formData.date + ' ' + formData.time)
     delete formData.date
     const timeline = new Timeline(formData)
-    timeline.save()
-    res.redirect('/stored/timelines')
+    timeline
+      .save()
+      .then(() => {
+        res.redirect('/stored/timelines')
+      })
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
   // [GET] stored/timelines/:_id/edit
   getEditTimeline(req, res, next) {
@@ -190,7 +205,11 @@ class StoredController {
           isAuthenticated: req.session.isLoggedIn,
         })
       })
-      .catch(next)
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
   // [PUT] stored/timelines/:_id
   putEditTimeline(req, res, next) {
@@ -199,15 +218,23 @@ class StoredController {
     delete formData.date
     Timeline.updateOne({ _id: req.params._id }, formData)
       .then(() => res.redirect('/stored/timelines'))
-      .catch(next)
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
   // [DELETE] stored/timelines/:_id
-  postDeleteTimeline(req, res) {
+  postDeleteTimeline(req, res, next) {
     const timelineId = req.params._id
-    console.log(timelineId)
-    Timeline.deleteOne({ _id: timelineId }).then(() =>
-      res.redirect('/stored/timelines'),
-    )
+    // console.log(timelineId)
+    Timeline.deleteOne({ _id: timelineId })
+      .then(() => res.redirect('/stored/timelines'))
+      .catch((err) => {
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+      })
   }
 }
 

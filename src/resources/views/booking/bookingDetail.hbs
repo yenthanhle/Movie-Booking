@@ -7,11 +7,10 @@
     })
 
 </script> --}}
-<div class="container booking">
-
-    <div class="seat-position">
-        <div class="board">
-            <div class="cell cell-top"><span>A1</span></div>
+<div class="container booking mt-4">
+    <div class="seat-position" style="width:60%; display:grid">
+        <div class="board" style="margin: auto;">
+            <div class="cell cell-top"></div>
             <div class="cell cell-top"></div>
             <div class="cell cell-top"></div>
             <div class="cell cell-top"></div>
@@ -172,63 +171,109 @@
             <div class="cell cell-couple"></div>
             <div class="cell cell-couple"></div>
         </div>
+        <br>
+        <div id="seat-type" style="width: 560px; margin: auto; margin-top: 5px" class="flex">
+            <div class=" col-sm-4 flex">
+                <button disabled class="mr-4"
+                    style="width: 30px; height: 30px; border: 1px solid rgb(77, 76, 76); border-radius: 50%; background: rgb(180, 175, 175);"></button>
+                <p style="width: 100px">Ghế thường</p>
+            </div>
+            <div class="col-sm-4 flex">
+                <button disabled class="mr-4"
+                    style="width: 30px; height: 30px; border: 1px solid rgb(77, 76, 76); border-radius: 50%; background: rgb(212, 140, 152);"></button>
+                <p>Ghế VIP</p>
+            </div>
+            <div class="col-sm-4 flex">
+                <button disabled class="mr-4"
+                    style="width: 30px; height: 30px; border: 1px solid rgb(77, 76, 76); border-radius: 50%; background: rgb(248, 69, 173);"></button>
+                <p>Ghế đôi</p>
+            </div>
+
+        </div>
+
     </div>
-    <form class="booking-detail mt-4 ml-0" method="POST" action="/booking/payment">
-
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Id</label>
-            <input readonly type="text" class="form-control" name="timeline_id" value={{id}}>
+    <form style="width:40%;" class="booking-detail ml-0" method="POST" action="/booking/payment">
+        <div class="form-group row mt-4 hidden">
+            <label class="col-sm-3 col-form-label">Id</label>
+            <input class="col-sm-9 form-control" readonly type="text" class="form-control" name="timeline_id"
+                value={{infor._id}}>
         </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Số vé</label>
-            <input readonly type="text" class="form-control" id="seat_count" name="seat_count" value='0'>
+        <div class="form-group row mt-4">
+            <label class="col-sm-3 col-form-label">Tên phim</label>
+            <input class="col-sm-9 form-control" readonly type="text" value="{{infor.movie_name}}">
         </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Ghế</label>
-            <input readonly type="text" class="form-control" id="seat_name" name="seat_name" value=''>
+        <div class="form-group row mt-4">
+            <label class="col-sm-3 col-form-label">Tên rạp</label>
+            <input class="col-sm-9 form-control" readonly type="text" value="{{infor.theater_name}}">
         </div>
-        <div class="form-field mt-4 ml-0">
-            <label class="label">Tổng tiền</label>
-            <input readonly type="text" class="form-control" id="payment" name="payment" value='0'>
+        <div class="form-group row mt-4">
+            <label class="col-sm-3 col-form-label">Ngày chiếu</label>
+            <input class="col-sm-9 form-control" readonly type="text" value="{{infor.date}}">
         </div>
-        <div class="form-field mt-4">
-            <button type="submit" class="btn btn-success">Thanh toán</button>
+        <div class="form-group row mt-4">
+            <label class="col-sm-3 col-form-label">Giờ chiếu</label>
+            <input class="col-sm-9 form-control" readonly type="text" value="{{infor.time}}">
+        </div>
+        <div class="form-group row mt-4">
+            <label class="col-sm-3 col-form-label">Số ghế</label>
+            <input class="col-sm-9 form-control" readonly type="text" class="form-control" id="seat_count"
+                name="seat_count">
+        </div>
+        <div class="form-group row mt-4">
+            <label class="col-sm-3 col-form-label">Tên ghế</label>
+            <input class="col-sm-9 form-control" readonly type="text" class="form-control" id="seat_name"
+                name="seat_name">
+        </div>
+        <div class="form-group row mt-4">
+            <label class="col-sm-3 col-form-label">Tổng tiền</label>
+            <input class="col-sm-9 form-control" readonly type="text" class="form-control" id="payment" name="payment"
+                value='0'>
+        </div>
+        <div class="form-group row mt-4">
+            <button style="margin-left: 250px;" type="submit" class="btn btn-success">Thanh toán</button>
 
         </div>
     </form>
+
+
 </div>
 
 <script>
     window.onload = function () {
+        const cell = document.getElementsByClassName('cell')
+        for (let i in cell) {
+            const seatName = getSeatName(i)
+            cell[i].innerHTML = `<span style="font-size:13px">   ${seatName}   </span>`
+        }
         document.querySelector('.board').onclick = function (e) {
             const seatCountField = document.getElementById('seat_count')
             const paymentField = document.getElementById('payment')
             const seatNameField = document.getElementById('seat_name')
-            const cell = document.getElementsByClassName('cell')
             var seatNameList = seatNameField.value
             for (let i in cell) {
                 if (cell[i] === e.target.closest('.cell')) {
-                    const seatRow = String.fromCharCode(i / 16 + 65)
-                    const seatNumber = i % 16 + 1
-                    const seatName = seatRow + seatNumber + ' '
-                    console.log(seatName, seatNameList)
+                    const seatName = getSeatName(i)
                     if (cell[i].classList.contains('active')) {
                         seatCountField.value = Number(seatCountField.value) - 1
                         seatNameList = seatNameList.replace(seatName, '')
                     }
                     else {
                         seatCountField.value = Number(seatCountField.value) + 1
-                        seatNameList += seatName
+                        seatNameList += seatName + ' '
 
                     }
                     paymentField.value = Number(seatCountField.value) * 45000
                     cell[i].classList.toggle('active')
                     // row  = 10 from A -> J, each row has 16 seat
                     seatNameField.value = seatNameList
-
                     break
                 }
             }
+        }
+        function getSeatName(index) {
+            const seatRow = String.fromCharCode(index / 16 + 65)
+            const seatNumber = index % 16 + 1
+            return seatRow + seatNumber
         }
     }
 

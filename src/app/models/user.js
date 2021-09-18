@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const timeZone = require('mongoose-timezone')
 // const slug = require('mongoose-slug-generator');
 // mongoose.plugin(slug)
-const ObjectId = Schema.ObjectId
+// const ObjectId = Schema.ObjectId
 
 const schema = new Schema(
   {

@@ -17,15 +17,14 @@ function Validator(options) {
     }
     if (errorMessage) {
       errorElement.innerText = errorMessage
-      inputElement.parentElement
-        .querySelector('input')
-        .classList.add('is-invalid')
+      const inputField =
+        inputElement.parentElement.querySelector('input') ||
+        inputElement.parentElement.querySelector('textarea')
+      inputField.classList.add('is-invalid')
       // console.log(inputElement.closest('div').querySelector('input'))
     } else {
       errorElement.innerText = ''
-      inputElement.parentElement
-        .querySelector('input')
-        .classList.remove('is-invalid')
+      inputElement.classList.remove('is-invalid')
     }
   }
   var formElement = document.querySelector(options.form)
@@ -41,7 +40,7 @@ function Validator(options) {
       if (inputElement) {
         // xử lý không nhập
         inputElement.onblur = function () {
-          // console.log(rule)
+          console.log(inputElement)
           validate(inputElement, rule)
         }
 

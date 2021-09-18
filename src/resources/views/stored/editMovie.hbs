@@ -1,71 +1,121 @@
 <div class="container">
-    <form class="film-input" method="POST" action="/stored/movies/{{movie._id}}?_method=PUT">
-        <div class="row mt-4">
-            <div class="form-field form-group col-5">
-                <label class="label">Tên phim</label>
-                <input type="text" class="form-control" value="{{movie.name}}" name="name">
+    <form class="film-input" method="POST" action="/stored/movies/{{movie._id}}/edit?_method=PUT">
+        <div class="form-group form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="name" style="width: 35%;" class="col-form-label">Tên phim</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.name}}" id="name"
+                        name="name">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field form-group col-5">
-                <label class="label">Thể loại</label>
-                <input type="text" class="form-control" value="{{movie.genre}}" name="genre">
+
+            <div class="form-group col-sm-6 flex">
+                <label for="genre" style="width: 35%;" class="col-form-label">Thể loại</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.genre}}" id="genre"
+                        name="genre">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="duration" style="width: 35%;" class="col-form-label">Thời lượng</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.duration}}"
+                        id="duration" name="duration">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 flex">
+                <label for="release_date" style="width: 35%;" class="col-form-label">Ngày khởi chiếu</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value={{movie.release_date}}
+                        id="release_date" name="release_date">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="form-field form-group col-5">
-                <label class="label">Thời lượng</label>
-                <input type="text" class="form-control" value={{movie.duration}} name="duration">
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="director" style="width: 35%;" class="col-form-label">Đạo diễn</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.director}}"
+                        id="director" name="director">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field col-5">
-                <label class="label">Ngày khởi chiếu</label>
-                <input type="date" class="form-control" value={{movie.release_date}} name="release_date">
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Đạo diễn</label>
-                <input type="text" class="form-control" value="{{movie.director}}" name="director">
-            </div>
-            <div class="form-field col-5">
-                <label class="label">Diễn viên</label>
-                <textarea type="text" class="form-control" name="actor">{{movie.actor}}</textarea>
+            <div class="form-group col-sm-6 flex">
+                <label for="actor" style="width: 35%;" class="col-form-label">Diễn viên</label>
+                <div style="width: 65%;">
+                    <textarea type="text" style="width: 100%;" class="form-control" id="actor"
+                        name="actor">{{movie.actor}}</textarea>
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Mô tả</label>
-                <textarea type="text" class="form-control" name="description">{{movie.description}}</textarea>
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="description" style="width: 35%;" class="col-form-label">Mô tả</label>
+                <div style="width: 65%;">
+                    <textarea type="text" style="width: 100%;" class="form-control" id="description"
+                        name="description">{{movie.description}}</textarea>
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field col-5">
-                <label class="label">Quốc gia</label>
-                <input type="text" class="form-control" value="{{movie.country}}" name="country">
+            <div class="form-group col-sm-6 flex">
+
+                <label for="country" style="width: 35%;" class="col-form-label">Quốc gia</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.country}}" id="country"
+                        name="country">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Đánh giá</label>
-                <input type="text" class="form-control" value="{{movie.rating}}" name="rating">
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="rating" style="width: 35%;" class="col-form-label">Đánh giá</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.rating}}" id="rating"
+                        name="rating">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-field col-5">
-                <label class="label">Số lượt bán</label>
-                <input type="text" class="form-control" value="{{movie.sold_ticket}}" name="sold_ticket">
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="form-field col-5">
-                <label class="label">Poster</label>
-                <textarea type="text" class="form-control" name="poster">{{movie.poster}}</textarea>
-            </div>
-            <div class="form-field col-5">
-                <label class="label">Link trailer</label>
-                <input type="text" class="form-control" value="{{movie.trailer}}" name="trailer">
+            <div class="form-group col-sm-6 flex">
+                <label for="sold_ticket" style="width: 35%;" class="col-form-label">Số lượt bán</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.sold_ticket}}"
+                        id="sold_ticket" name="sold_ticket">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success">Cập nhật</button>
+        <div class="form-group row mt-3">
+            <div class="form-group col-sm-6 flex">
+                <label for="poster" style="width: 35%;" class="col-form-label">Poster</label>
+                <div style="width: 65%;">
+                    <textarea type="text" style="width: 100%;" class="form-control" id="poster"
+                        name="poster">{{movie.poster}}</textarea>
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 flex">
+                <label for="trailer" style="width: 35%;" class="col-form-label">Link trailer</label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" value="{{movie.trailer}}" id="trailer"
+                        name="trailer">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <button style="margin: auto;" type="submit" class="btn btn-success">Cập nhật</button>
+        </div>
     </form>
 </div>

@@ -1,6 +1,6 @@
-<div class="container mt-4">
+<div class="container mt-4" style="width:70%;">
     {{#if error}}
-    <div class="alert alert-danger" role="alert">
+    <div class=" alert alert-danger" role="alert" style="width:70%; margin: 0 auto;">
         {{error}}
     </div>
     {{/if}}
@@ -9,78 +9,133 @@
         {{respond}}
     </div>
     {{/if}}
-    <form method="POST" action="/auth/signup" id="form-signup" class="form-inline">
-        <div class="form-group col-md-10 mt-4 form-row">
-            <label for="user_name" class="col-sm-2 col-form-label">User name</label>
-            <input required type="text" class="form-control" id="user_name" name="user_name" placeholder="User name"
-                value="{{oldInput.user_name}}">
-            <div class="invalid-feedback form-message"></div>
+    <form style="width:70%; margin: 0 auto; border-style:solid; border-color: rgb(9, 9, 63); padding:50px;"
+        method="POST" action="/auth/signup" id="form-signup">
+        <div class="form-group row">
+            <h2 style="width:auto;margin: 0 auto">Đăng ký</h2>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <label for="user_name" class="col-sm-2 col-form-label">Email</label>
-            <input required type="email" class="form-control" id="email" name="email" placeholder="Email"
-                value="{{oldInput.email}}">
-            <div class="invalid-feedback form-message"></div>
-        </div>
-        <div class="col-md-10 mt-4 form-row">
-            <label for="password" class="col-sm-2 col-form-label">Password</label>
-            <input required type="password" class="form-control" id="password" name="password" placeholder="Password"
-                value={{oldInput.password}}>
-            <i style="position: absolute; margin-left: 300px; height: 80%; opacity: 0.8"
-                class="fa fa-fw fa-eye-slash field-icon" onclick="passwordClickShowFunction(this)"></i>
-            <small id="passwordHelpInline" class="text-muted ml-4">
-                Must contain number, uppercase, lowercase and special character.
-            </small>
-            <div class="invalid-feedback  ml-4 form-message"> </div>
-        </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
-            <input required type="password" class="form-control" id="password_confirmation" name="password_confirmation"
-                placeholder="Confirm Password" value={{oldInput.password_confirmation}}>
-            <i style="position: absolute; margin-left: 300px; height: 80%; opacity: 0.8;"
-                class="fa fa-fw fa-eye-slash field-icon" onclick="passwordClickShowFunction(this)"></i>
-            <div class="invalid-feedback ml-4 form-message"></div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-10 mt-4">
-                <label for="gender" class="col-sm-2 col-form-label">Gender</label>
-                <select id="inputState" name="gender" class="form-control">
-                    <option selected>Nam</option>
-                    <option>Nữ</option>
-                    <option>Khác</option>
-                </select>
+        <div class="form-group row mt-4">
+            <div class="form-group col-sm-6 flex">
+                <label for="first_name" style="width: 35%;" class="col-form-label">Họ
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="first_name" placeholder="">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
-            <div class="form-group col-md-10 mt-4">
-                <label for="date_of_birth" class="col-sm-2 col-form-label">Date of birth</label>
-                <input required type="date" class="form-control" id="date_of_birth" name="date_of_birth"
-                    value={{oldInput.date_of_birth}}>
-                <div class="invalid-feedback ml-4 form-message"></div>
+            <div class="form-group col-sm-6 flex">
+                <label for="last_name" style="width: 35%;" class="col-form-label">Tên
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input type="text" style="width: 100%;" class="form-control" id="last_name" placeholder="">
+                    <div class="invalid-feedback form-message"></div>
+                </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-10 mt-4">
-                <label for="phone_number" class="col-sm-2 col-form-label">Number phone</label>
+        <div class="form-group row mt-4">
+            <div class="form-group col-sm-6 flex">
+                <label for="gender" style="width: 35%" class="col-form-label">Gender
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <select style="width: 100%;" id="inputState" name="gender" class="form-control">
+                        <option selected>Nam</option>
+                        <option>Nữ</option>
+                        <option>Khác</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 flex">
+                <label for="date_of_birth" style="width: 35%;" class="col-form-label">Date of birth
+                    <sp style="color:red;"> *</sp>
+                </label>
+                <div style="width: 65%;">
+                    <input style="width: 100%;" required type="date" class="form-control" id="date_of_birth"
+                        name="date_of_birth" value={{oldInput.date_of_birth}}>
+                    <div class="invalid-feedback ml-4 form-message"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label for="phone_number" class="col-sm-3 col-form-label">Number phone
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div class="col-sm-9">
                 <input required type="text" class="form-control" id="phone_number" name="phone_number"
                     value={{oldInput.phone_number}}>
                 <div class="invalid-feedback ml-4 form-message"></div>
             </div>
-            <div class="form-group col-md-10 mt-4">
-                <label for="address" class="col-sm-2 col-form-label">Address</label>
+        </div>
+        <div class="form-group row mt-4">
+            <label for="user_name" class="col-sm-3 col-form-label">User name
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div class="col-sm-9">
+                <input required type="text" class="form-control" id="user_name" name="user_name" placeholder="User name"
+                    value="{{oldInput.user_name}}">
+                <div class="invalid-feedback form-message"></div>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label for="email" class="col-sm-3 col-form-label">Email
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div class="col-sm-9">
+                <input required type="email" class="form-control" id="email" name="email" placeholder="Email"
+                    value="{{oldInput.email}}">
+                <div class="invalid-feedback form-message"></div>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label for="password" class="col-sm-3 col-form-label">Password
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div class="col-sm-9">
+                <i style="position: absolute; margin-left: 450px; margin-top:10px;height: 100%; opacity: 0.8"
+                    class="fa fa-fw fa-eye-slash field-icon" onclick="passwordClickShowFunction(this)"></i>
+                <input required type="password" class="form-control" id="password" name="password"
+                    placeholder="Password" value={{oldInput.password}}>
+                <small id="passwordHelpInline" class="text-muted ml-4">
+                    Must contain number, uppercase, lowercase and special character.
+                </small>
+                <div class="invalid-feedback  ml-4 form-message"> </div>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label for="password_confirmation" class="col-sm-3 col-form-label">Confirm Password
+                <sp style="color:red;"> *</sp>
+            </label>
+            <div class="col-sm-9">
+                <i style="position: absolute; margin-left: 450px;  margin-top:10px; height: 100%; opacity: 0.8;"
+                    class="fa fa-fw fa-eye-slash field-icon" onclick="passwordClickShowFunction(this)"></i>
+                <input required type="password" class="form-control" id="password_confirmation"
+                    name="password_confirmation" placeholder="Confirm Password"
+                    value={{oldInput.password_confirmation}}>
+                <div class="invalid-feedback ml-4 form-message"></div>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label for="address" class="col-sm-3 col-form-label">Address</label>
+            <div class="col-sm-9">
                 <textarea required type="text" class="form-control" id="address"
                     name="address">{{oldInput.address}}</textarea>
                 <div class="invalid-feedback ml-4 form-message"></div>
             </div>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <a href="/auth/login">Already had account</a>
+        <div class="form-group row mt-4">
+            <button type="submit" style="margin: 0 auto;" class="btn btn-primary">Sign up</button>
         </div>
-        <div class="form-group col-md-10 mt-4 form-row">
-            <button type="submit" class="btn btn-primary">Sign up</button>
+        <div class="dropdown-divider mt-5"></div>
+
+        <div class="form-group row mt-5">
+            <a class="btn btn-success btn-md active" style="margin: 0 auto;" href="/auth/login">Log in</a>
         </div>
     </form>
 </div>
 
-<script src="/validators/loginValidator.js"></script>
+<script src="/validators/inputValidator.js"></script>
 <script>
     Validator({
         form: '#form-signup',

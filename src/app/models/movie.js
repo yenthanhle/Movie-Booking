@@ -13,6 +13,7 @@ const schema = new Schema(
     director: String,
     actor: String,
     description: String,
+    country: String,
     rating: Number,
     sold_ticket: Number,
     poster: String,

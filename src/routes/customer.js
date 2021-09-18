@@ -23,7 +23,8 @@ const fileFilter = (req, file, cb) => {
   }
 }
 const upload = multer({ storage: storage, fileFilter: fileFilter })
-router.put('/account/:_id/edit', customerController.putEditAccount)
+// router.post('/account/:_id/edit', customerController.putEditAccount)
+
 router.post(
   '/avatar/:id/update',
   upload.single('avatar'),
@@ -31,5 +32,8 @@ router.post(
 )
 router.get('/orders/:_id', customerController.getInvoice)
 router.get('/orders', customerController.getOrders)
+router.put('/account/:_id/edit', customerController.putEditAccount)
+// router.get('/account/:_id/edit', customerController.putEditAccount)
+
 router.get('/account', customerController.getAccount)
 module.exports = router

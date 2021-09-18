@@ -28,6 +28,7 @@ module.exports = {
     return date.toLocaleTimeString().slice(0, 5)
   },
   mongooseDateToDate: (date) => date.toLocaleDateString(),
+
   getTheaterName: (id, cb) => {
     Theater.findById(id).then((theater) => cb(theater.toObject()))
   },
@@ -50,7 +51,11 @@ module.exports = {
         resultTemp.movie_name = result.movie.name
         resultTemp.theater_name = result.theater.name
         resultTemp.date = inputTimeline.time.toLocaleDateString()
-        resultTemp.time = inputTimeline.time.toLocaleTimeString()
+        resultTemp.time = inputTimeline.time
+          .toLocaleTimeString()
+          .split('')
+          .slice(0, 5)
+          .join('')
         resultTemp.room = inputTimeline.room
         return callback(resultTemp)
       },

@@ -8,7 +8,17 @@ class HomeController {
   }
   // [GET] /comming-soon
   getCommingMovies(req, res) {
-    const today = new Date()
+    let today = new Date()
+    const year = today.getFullYear()
+    const month =
+      today.getMonth() + 1 <= 9
+        ? '0' + (today.getMonth() + 1)
+        : today.getMonth() + 1
+    const date =
+      today.getDate() + 1 <= 9
+        ? '0' + (today.getDate() + 1)
+        : today.getDate() + 1
+    today = year + '-' + month + '-' + date
     Movie.find({ release_date: { $gte: today } })
       .then((movies) =>
         res.render('home', {
@@ -23,7 +33,18 @@ class HomeController {
   }
   // [GET] /showing-now
   getShowingMovies(req, res) {
-    const today = new Date()
+    let today = new Date()
+    const year = today.getFullYear()
+    const month =
+      today.getMonth() + 1 <= 9
+        ? '0' + (today.getMonth() + 1)
+        : today.getMonth() + 1
+    const date =
+      today.getDate() + 1 <= 9
+        ? '0' + (today.getDate() + 1)
+        : today.getDate() + 1
+    today = year + '-' + month + '-' + date
+    // console.log(today >= '2021-04-02')
     Movie.find({ release_date: { $lte: today } })
       .then((movies) =>
         res.render('home', {
