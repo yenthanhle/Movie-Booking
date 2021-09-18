@@ -8,7 +8,7 @@
     "watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Thanh",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
